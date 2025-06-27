@@ -40,7 +40,14 @@ for col in columns:
             value_counts = df[col].value_counts()
             total = value_counts.sum()
             value_counts_with_percent = value_counts.apply(lambda x: f"{x} ({(x/total*100):.1f}%)")
-            st.write(value_counts_with_percent)
+            
+            # Create a DataFrame to display with percentages
+            display_df = pd.DataFrame({
+                'Value': value_counts.index,
+                'Count': value_counts.values,
+                'Percentage': [f"{(x/total*100):.1f}%" for x in value_counts.values]
+            })
+            st.dataframe(display_df)
         
             # Create bar chart
             if col != 'Territory':  # Skip territory for bar chart
