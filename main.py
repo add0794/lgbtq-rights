@@ -12,9 +12,10 @@ df = pd.merge(df, democracy_df, left_on='Territory', right_on='Country', how='ou
 # Drop the duplicate Country column after merge
 df.drop('Country', axis=1, inplace=True)
 
-# Fill NaN values for democracy index with 0
+# Handle NaN values for democracy index
+# Convert to numeric and fill NaN with 0
 # This means countries without democracy data will show as having no democracy score
-df['Democracy Index'] = df['Democracy Index'].fillna(0)
+df['Democracy Index'] = pd.to_numeric(df['Democracy Index'], errors='coerce').fillna(0)
 
 # Set page configuration
 st.set_page_config(page_title="LGBTQ Rights in Pride Month 2025", layout="wide")

@@ -49,6 +49,9 @@ def get_democracy_index_data(url):
     if 'Democracy Index' in df.columns:
         df['Democracy Index'] = pd.to_numeric(df['Democracy Index'], errors='coerce')
     
+    # Keep only Country and Democracy Index columns
+    df = df[['Country', 'Democracy Index']]
+    
     return df
 
 # Create DataFrame and save to CSV
