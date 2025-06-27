@@ -35,23 +35,21 @@ columns = df.columns
 for col in columns:
     if col == 'Territory' or col == 'Same-sex sexual activity':
         continue
-    elif "Recognition of same-sex unions":
-        st.write()
     else:
         with st.expander(f"{col}"):
             st.subheader(col)
             # Column descriptions and analysis
             if col == "Recognition of same-sex unions":
                 st.write("This column is a boolean value that indicates whether same-sex unions are recognized by law.")
-            elif col == "Recognition of same-sex marriages":
+            if col == "Recognition of same-sex marriages":
                 st.write("This column is a boolean value that indicates whether same-sex marriages are recognized by law.")
-            elif col == "Adoption by same-sex couples":
+            if col == "Adoption by same-sex couples":
                 st.write("This column is a boolean value that indicates whether adoption by same-sex couples is recognized by law.")
-            elif col == "LGBT people allowed to serve openly in military?":
+            if col == "LGBT people allowed to serve openly in military?":
                 st.write("This column is a boolean value that indicates whether LGBT people are allowed to serve openly in military.")
-            elif col == "Anti-discrimination laws concerning sexual orientation":
+            if col == "Anti-discrimination laws concerning sexual orientation":
                 st.write("This column is a boolean value that indicates whether anti-discrimination laws concerning sexual orientation are in place.")
-            elif col == "Anti-discrimination laws concerning gender identity":
+            if col == "Anti-discrimination laws concerning gender identity":
                 st.write("This column is a boolean value that indicates whether anti-discrimination laws concerning gender identity are in place.")
             
             # Basic statistics and analysis
