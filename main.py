@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
+from scipy.stats import ttest_ind
 
 # Read datasets
 df = pd.read_csv('lgbtq_rights_by_country.csv')
