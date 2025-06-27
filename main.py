@@ -40,17 +40,17 @@ for col in columns:
             st.subheader(col)
             # Column descriptions and analysis
             if col == "Recognition of same-sex unions":
-                st.write("This column is a boolean value that indicates whether same-sex unions are recognized by law.")
+                st.write("Indicates whether a country legally recognizes same-sex unions, such as civil partnerships or domestic partnerships. This is distinct from marriage, but still grants some or many of the legal benefits associated with marriage, such as inheritance rights, hospital visitation, and tax benefits.")
             if col == "Recognition of same-sex marriages":
-                st.write("This column is a boolean value that indicates whether same-sex marriages are recognized by law.")
+                st.write("Indicates whether same-sex marriage is legally recognized, granting full marital rights equal to those of heterosexual couples. This includes not only civil benefits but also symbolic recognition of equality under the law. As of now, fewer than 40 countries allow full same-sex marriage.")
             if col == "Adoption by same-sex couples":
-                st.write("This column is a boolean value that indicates whether adoption by same-sex couples is recognized by law.")
+                st.write("Indicates whether same-sex couples are legally allowed to adopt children. This includes joint adoption as well as second-parent or stepchild adoption. Legal barriers in many countries still prevent same-sex couples from building families with full parental rights.")
             if col == "LGBT people allowed to serve openly in military?":
-                st.write("This column is a boolean value that indicates whether LGBT people are allowed to serve openly in military.")
+                st.write("Indicates whether LGBTQ+ individuals are permitted to serve openly in the national armed forces without risk of expulsion, harassment, or forced concealment. In some countries, LGBTQ+ people are barred entirely; in others, they may serve but must hide their identity.")
             if col == "Anti-discrimination laws concerning sexual orientation":
-                st.write("This column is a boolean value that indicates whether anti-discrimination laws concerning sexual orientation are in place.")
+                st.write("Indicates whether a country has national laws that protect individuals from discrimination based on sexual orientation in key areas such as employment, housing, education, and access to services. These laws are essential for protecting the dignity and safety of LGBTQ+ people.")
             if col == "Anti-discrimination laws concerning gender identity":
-                st.write("This column is a boolean value that indicates whether anti-discrimination laws concerning gender identity are in place.")
+                st.write("Indicates whether a country has national laws protecting against discrimination based on gender identity. These laws are crucial for safeguarding the rights of transgender and gender nonconforming individuals in areas such as employment, healthcare, education, and housing.")
             
             # Basic statistics and analysis
             st.write("\nAnalysis:")
