@@ -212,6 +212,13 @@ for i, row in avg_scores.iterrows():
     )
 
 st.plotly_chart(fig, key='democracy')
+    
+# Run t-test
+from scipy.stats import ttest_ind
+    
+# Get democracy scores for countries with and without marriage
+scores_with_marriage = merged_df[merged_df['Same-sex marriage'] == 'Yes']['Democracy Index'].dropna()
+scores_without_marriage = merged_df[merged_df['Same-sex marriage'] == 'No']['Democracy Index'].dropna()
 
 # Show statistics
 st.markdown(f"""
@@ -220,3 +227,19 @@ st.markdown(f"""
 - Average democracy score for countries without same-sex marriage: {marriage_not_allowed:.2f}
 - Difference: {marriage_allowed - marriage_not_allowed:.2f} points
 """)
+
+# Run t-test
+from scipy.stats import ttest_ind
+
+# Run two-sample t-test
+t_stat, p_value = ttest_ind(scores_with_marriage, scores_without_marriage, equal_var=False)
+
+# Show t-test results
+st.markdown(f"""
+### Statistical Significance:
+- T-statistic: {t_stat:.2f}
+- P-value: {p_value:.4f}
+- Result: The difference in democracy scores is {"statistically significant" if p_value < 0.05 else "not statistically significant"} (α=0.05)
+""")
+
+st.plotly_chart(fig, key='democracy')
