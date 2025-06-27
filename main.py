@@ -1,7 +1,6 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
-from scipy.stats import ttest_ind
 
 # Read datasets
 df = pd.read_csv('lgbtq_rights_by_country.csv')
@@ -229,7 +228,7 @@ st.markdown(f"""
 - Difference: {marriage_allowed - marriage_not_allowed:.2f} points
 """)
 
-# Run t-test
+# Import scipy only when needed
 from scipy.stats import ttest_ind
 
 # Run two-sample t-test
