@@ -58,7 +58,7 @@ with st.expander("Countries with Unknown Data"):
         color_continuous_scale="Viridis",
         hover_data=['Territory', 'Unknown Rights']
     )
-    st.plotly_chart(fig, key='democracy_chart')
+    st.plotly_chart(fig, key='unknown_rights_map')
 
 # Analyze each column
 
@@ -212,7 +212,7 @@ for i, row in avg_scores.iterrows():
         yshift=10
     )
 
-st.plotly_chart(fig, key='democracy')
+st.plotly_chart(fig, key='democracy_bar_chart')
     
 # Run t-test
     
@@ -239,4 +239,4 @@ st.markdown(f"""
 - Result: The difference in democracy scores is {"statistically significant" if p_value < 0.05 else "not statistically significant"} (α=0.05)
 """)
 
-st.plotly_chart(fig, key='democracy')
+st.plotly_chart(fig, key='democracy_bar_chart')
