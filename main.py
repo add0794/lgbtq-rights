@@ -149,6 +149,14 @@ for column in columns:
     })
     display_df['Count'] = display_df['Count'].str.ljust(3)  # Left-justify count values
     st.table(display_df)
+
+    # Create bar chart
+    fig = px.bar(
+        value_counts,
+        title=f'Count',
+        labels={'index': 'Value', 'value': 'Count'}
+    )
+    st.plotly_chart(fig, key=f'bar_chart_{column}')
     
     # Create map visualization
     fig = px.choropleth(
@@ -161,14 +169,6 @@ for column in columns:
         hover_data=['Territory', column]
     )
     st.plotly_chart(fig, key=f'map_{column}')
-    
-    # Create bar chart
-    fig = px.bar(
-        value_counts,
-        title=f'Count',
-        labels={'index': 'Value', 'value': 'Count'}
-    )
-    st.plotly_chart(fig, key=f'bar_chart_{column}')
 
 st.markdown("""
 ### Insight: Same-sex Marriage and Democracy
@@ -238,5 +238,3 @@ st.markdown(f"""
 - P-value: {p_value:.4f}
 - Result: The difference in democracy scores is {"statistically significant" if p_value < 0.05 else "not statistically significant"} (α=0.05)
 """)
-
-st.plotly_chart(fig, key='democracy_bar_chart_2')
