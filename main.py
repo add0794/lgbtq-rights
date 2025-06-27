@@ -20,7 +20,7 @@ Feel free to give feedback!
 Data can be found [here](https://www.kaggle.com/datasets/wilomentena/lgbt-rights-worldwide/data).
 """)
 
-# Create tabs for each analysis
+# Analyze each column
 with st.expander("Dataset Overview"):
     st.write("Number of countries:", len(df['Territory'].unique()))
     st.write("Countries (Descending Order):")
@@ -87,3 +87,17 @@ for col in columns:
                     color_continuous_scale="Viridis"
                 )
                 st.plotly_chart(fig, key=f'map_chart_{col}')
+
+# Display countries with unknown data
+with st.expander("Countries with Unknown Data"):
+    st.write("The following countries have unknown data for some rights:")
+    unknown_data = df[df.isin(['Unknown']).any(axis=1)]
+    unknown_countries = unknown_data['Territory'].unique()
+    st.write("Countries:", unknown_countries.tolist())
+    
+    # Show which rights are unknown for each country
+    for country in unknown_countries:
+        st.subheader(country)
+        unknown_rights = unknown_data[unknown_data['Territory'] == country]
+        unknown_columns = unknown_rights.columns[unknown_rights.isin(['Unknown']).any()]
+        st.write("Unknown rights:", unknown_columns.tolist())
