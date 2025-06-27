@@ -250,7 +250,7 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
         # Select columns for correlation analysis (excluding non-binary columns)
         analysis_columns = ['Same-sex marriage', 'Recognition of same-sex unions', 
                           'Adoption by same-sex couples', 
-                          'LGBT people allowed to serve openly in military?',
+                          'LGBT people allowed to serve openly in military',
                           'Anti-discrimination laws concerning sexual orientation',
                           'Anti-discrimination laws concerning gender identity']
         
