@@ -13,7 +13,18 @@ Pride Month is a time to honor the resilience, visibility, and progress of queer
 
 As Pride comes to a close, I’ve analyzed global LGBTQ+ rights, tracking legal recognition, civil protections, and societal acceptance across regions. It highlights where progress has been made and where urgent action is still needed, emphasizing that Pride is not only a celebration, but also a call to action for global equity and human rights.
 
-Feel free to give feedback!
+I've taken a look at several indicators:
+- dataset overview: dataset overview and unknown data.
+- progress and setbacks in LGBTQ+ rights.
+- distribution of various indicators, including same-sex marriage, adoption by same-sex couples, and anti-discrimination laws around the world.
+- country-level analysis: correlation between democracy scores and LGBTQ+ rights.
+
+I've made some observations:
+- The West is leading the way in LGBTQ+ rights, with many countries allowing same-sex marriage and adoption by same-sex couples.
+- The Global South is lagging behind, with many countries criminalizing same-sex relationships and providing minimal legal protections.
+- There is a correlation between democracy scores and LGBTQ+ rights, with countries with higher democracy scores tending to have more LGBTQ+ rights.
+
+We certainly have much to do to ensure LGBTQ+ rights are protected around the world.
 
 Data can be found on [Kaggle](https://www.kaggle.com/datasets/wilomentena/lgbt-rights-worldwide/data) and [World Population Review](https://worldpopulationreview.com/country-rankings/democracy-index-by-country).
 """)
@@ -133,8 +144,6 @@ with st.expander("Column Analysis Tabs"):
                 st.write("Indicates whether a country has national laws protecting against discrimination based on gender identity. These laws are crucial for safeguarding the rights of transgender and gender nonconforming individuals in areas such as employment, healthcare, education, and housing.")
             
             # Basic statistics and analysis
-            st.write("Unique values:", df[column].nunique())
-            st.write("Value counts with percentages:")
             value_counts = df[column].value_counts()
             total = value_counts.sum()
             
@@ -150,7 +159,7 @@ with st.expander("Column Analysis Tabs"):
             # Create bar chart
             fig = px.bar(
                 value_counts,
-                title=f'Count',
+                title=f'Breakdown of {column}',
                 labels={'index': 'Value', 'value': 'Count'}
             )
             st.plotly_chart(fig, key=f'bar_chart_{column}')
