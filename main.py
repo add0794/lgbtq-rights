@@ -34,7 +34,7 @@ with st.expander("Countries with Unknown Data"):
     # Process unknown data
     for _, row in df.iterrows():
         country = row['Territory']
-        unknown_rights = [col for col in df.columns if row[col] == 'Unknown']
+        unknown_rights = [column for column in df.columns if row[column] == 'Unknown']
         if unknown_rights:
             unknown_data_dict[country] = unknown_rights
     
@@ -135,9 +135,9 @@ for column in columns:
         st.write("Indicates whether a country has national laws protecting against discrimination based on gender identity. These laws are crucial for safeguarding the rights of transgender and gender nonconforming individuals in areas such as employment, healthcare, education, and housing.")
     
     # Basic statistics and analysis
-    st.write("Unique values:", df[col].nunique())
+    st.write("Unique values:", df[column].nunique())
     st.write("Value counts with percentages:")
-    value_counts = df[col].value_counts()
+    value_counts = df[column].value_counts()
     total = value_counts.sum()
     
     # Create a DataFrame to display with percentages
