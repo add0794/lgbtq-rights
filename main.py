@@ -17,7 +17,7 @@ As Pride comes to a close, I’ve analyzed global LGBTQ+ rights, tracking legal 
 
 Feel free to give feedback!
 
-Data can be found [here](https://www.kaggle.com/datasets/wilomentena/lgbt-rights-worldwide/code)
+Data can be found [here](https://www.kaggle.com/datasets/wilomentena/lgbt-rights-worldwide/data).
 """)
 
 # Create tabs for each analysis
@@ -35,9 +35,23 @@ columns = df.columns
 for col in columns:
     if col == 'Territory' or col == 'Same-sex sexual activity':
         continue
+    elif "Recognition of same-sex unions":
+        st.write()
     else:
-        with st.expander(f"Analysis of {col}"):
+        with st.expander(f"{col}"):
             st.subheader(col)
+            if col == "Recognition of same-sex unions":
+                st.write("This column is a boolean value that indicates whether same-sex unions are recognized by law.")   
+            if col == "Recognition of same-sex marriages":
+                st.write("This column is a boolean value that indicates whether same-sex marriages are recognized by law.")
+            if col == "Adoption by same-sex couples":
+                st.write("This column is a boolean value that indicates whether adoption by same-sex couples is recognized by law.")
+            if col == "LGBT people allowed to serve openly in military?":
+                st.write("This column is a boolean value that indicates whether LGBT people are allowed to serve openly in military.")
+            if col == "Anti-discrimination laws concerning sexual orientation":
+                st.write("This column is a boolean value that indicates whether anti-discrimination laws concerning sexual orientation are in place.")
+            if col == "Anti-discrimination laws concerning gender identity":
+                st.write("This column is a boolean value that indicates whether anti-discrimination laws concerning gender identity are in place.")
             
             # Basic statistics
             st.write("Unique values:", df[col].nunique())
