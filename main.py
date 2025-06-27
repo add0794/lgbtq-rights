@@ -114,24 +114,24 @@ st.markdown("These examples highlight the global divergence in LGBTQ+ rights: wh
 columns = df.columns
 st.header("Column Analysis")
 
-for col in columns:
-    if col == 'Territory' or col == 'Same-sex sexual activity':
+for column in columns:
+    if column == 'Territory' or column == 'Same-sex sexual activity':
         continue
     
-    st.subheader(col)
+    st.subheader(column)
     
     # Column descriptions and analysis
-    if col == "Recognition of same-sex unions":
+    if column == "Recognition of same-sex unions":
         st.write("Indicates whether a country legally recognizes same-sex unions, such as civil partnerships or domestic partnerships. This is distinct from marriage, but still grants some or many of the legal benefits associated with marriage, such as inheritance rights, hospital visitation, and tax benefits.")
-    if col == "Same-sex marriage":
+    if column == "Same-sex marriage":
         st.write("Indicates whether same-sex marriage is legally recognized, granting full marital rights equal to those of heterosexual couples. This includes not only civil benefits but also symbolic recognition of equality under the law. As of now, less than one-third of countries allow full same-sex marriage.")
-    if col == "Adoption by same-sex couples":
+    if column == "Adoption by same-sex couples":
         st.write("Indicates whether same-sex couples are legally allowed to adopt children. This includes joint adoption as well as second-parent or stepchild adoption. Legal barriers in many countries still prevent same-sex couples from building families with full parental rights.")
-    if col == "LGBT people allowed to serve openly in military?":
+    if column == "LGBT people allowed to serve openly in military?":
         st.write("Indicates whether LGBTQ+ individuals are permitted to serve openly in the national armed forces without risk of expulsion, harassment, or forced concealment. In some countries, LGBTQ+ people are barred entirely; in others, they may serve but must hide their identity.")
-    if col == "Anti-discrimination laws concerning sexual orientation":
+    if column == "Anti-discrimination laws concerning sexual orientation":
         st.write("Indicates whether a country has national laws that protect individuals from discrimination based on sexual orientation in key areas such as employment, housing, education, and access to services. These laws are essential for protecting the dignity and safety of LGBTQ+ people.")
-    if col == "Anti-discrimination laws concerning gender identity":
+    if column == "Anti-discrimination laws concerning gender identity":
         st.write("Indicates whether a country has national laws protecting against discrimination based on gender identity. These laws are crucial for safeguarding the rights of transgender and gender nonconforming individuals in areas such as employment, healthcare, education, and housing.")
     
     # Basic statistics and analysis
