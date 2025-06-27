@@ -12,10 +12,9 @@ df = pd.merge(df, democracy_df, left_on='Territory', right_on='Country', how='ou
 # Drop the duplicate Country column after merge
 df.drop('Country', axis=1, inplace=True)
 
-# Handle NaN values for democracy index
-# Convert to numeric and fill NaN with 0
+# Fill NaN values for democracy index with 0
 # This means countries without democracy data will show as having no democracy score
-df['Democracy Index'] = pd.to_numeric(df['Democracy Index'], errors='coerce').fillna(0)
+df['Democracy Index'] = df['Democracy Index'].fillna(0)
 
 # Set page configuration
 st.set_page_config(page_title="LGBTQ Rights in Pride Month 2025", layout="wide")
@@ -46,24 +45,6 @@ columns = df.columns
 
 # Add country-level highlights
 with st.expander("🌍 Country-Level Highlights: Where LGBTQ+ Rights Are Improving or Regressing"):
-    st.subheader("✅ Countries Where LGBTQ+ Rights Have Improved")
-    # ... rest of the existing content ...
-
-# Add countries with no democracy index
-with st.expander("Countries with No Democracy Index Data"):
-    st.subheader("Countries with No Democracy Index Data")
-    
-    # Get countries with democracy index of 0
-    no_democracy_countries = df[df['Democracy Index'] == 0]['Territory'].unique()
-    
-    if len(no_democracy_countries) > 0:
-        st.write("These countries have no democracy index data available:")
-        st.write(no_democracy_countries)
-    else:
-        st.write("All countries have democracy index data available.")
-
-# Add insights
-with st.expander("Insights"):
     st.subheader("✅ Countries Where LGBTQ+ Rights Have Improved")
 
     st.markdown("""
