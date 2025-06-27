@@ -25,6 +25,38 @@ with st.expander("Dataset Overview"):
 # Analyze each column
 columns = df.columns
 
+# Create visualizations
+with st.expander("Visualizations"):
+    st.subheader("LGBTQ Rights Distribution")
+    
+    # Create a dropdown to select which column to visualize
+    selected_column = st.selectbox(
+        "Select a right to visualize:",
+        [col for col in columns if col != 'Territory']
+    )
+    
+    # Create bar chart
+    st.subheader(f"{selected_column} Distribution")
+    value_counts = df[selected_column].value_counts()
+    fig = px.bar(
+        value_counts,
+        title=f'Distribution of {selected_column}',
+        labels={'index': 'Status', 'value': 'Count'}
+    )
+    st.plotly_chart(fig)
+    
+    # Create map visualization
+    st.subheader(f"{selected_column} by Country")
+    fig = px.choropleth(
+        df,
+        locations="Territory",
+        locationmode="country names",
+        color=selected_column,
+        title=f"{selected_column} by Country",
+        color_continuous_scale="Viridis"
+    )
+    st.plotly_chart(fig)
+
 for col in columns:
     if col == 'Territory':
         continue
