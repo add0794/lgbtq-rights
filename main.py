@@ -260,11 +260,27 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
         # Calculate correlation matrix
         corr_matrix = binary_df.corr()
         
-        # Create heatmap
+        # Create interactive heatmap
         fig = px.imshow(
             corr_matrix,
             color_continuous_scale='RdBu',
-            range_color=[0, 1]
+            range_color=[0, 1],
+            color_continuous_midpoint=0.5,  # Center the color scale at 0.5
+            hover_data={'x': False, 'y': False}  # Remove default hover data
         )
         
-        # st.plotly_chart(fig, key='correlation_heatmap')
+        # Update layout for better interactivity
+        fig.update_layout(
+            hovermode='closest',
+            clickmode='event+select',
+            dragmode='select'
+        )
+        
+        # Update colorbar
+        fig.update_coloraxes(
+            showscale=True,
+            colorbar_title_text='Correlation',
+            colorbar_title_side='right'
+        )
+        
+        st.plotly_chart(fig, key='correlation_heatmap')
