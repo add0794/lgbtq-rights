@@ -267,4 +267,4 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
             range_color=[0, 1]
         )
         
-        st.plotly_chart(fig, key='correlation_heatmap')
+        # st.plotly_chart(fig, key='correlation_heatmap')
