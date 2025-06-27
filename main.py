@@ -40,33 +40,56 @@ for col in columns:
     else:
         with st.expander(f"{col}"):
             st.subheader(col)
+            # Column descriptions and analysis
             if col == "Recognition of same-sex unions":
-                st.write("This column is a boolean value that indicates whether same-sex unions are recognized by law.")   
-            if col == "Recognition of same-sex marriages":
+                st.write("This column is a boolean value that indicates whether same-sex unions are recognized by law.")
+            elif col == "Recognition of same-sex marriages":
                 st.write("This column is a boolean value that indicates whether same-sex marriages are recognized by law.")
-            if col == "Adoption by same-sex couples":
+            elif col == "Adoption by same-sex couples":
                 st.write("This column is a boolean value that indicates whether adoption by same-sex couples is recognized by law.")
-            if col == "LGBT people allowed to serve openly in military?":
+            elif col == "LGBT people allowed to serve openly in military?":
                 st.write("This column is a boolean value that indicates whether LGBT people are allowed to serve openly in military.")
-            if col == "Anti-discrimination laws concerning sexual orientation":
+            elif col == "Anti-discrimination laws concerning sexual orientation":
                 st.write("This column is a boolean value that indicates whether anti-discrimination laws concerning sexual orientation are in place.")
-            if col == "Anti-discrimination laws concerning gender identity":
+            elif col == "Anti-discrimination laws concerning gender identity":
                 st.write("This column is a boolean value that indicates whether anti-discrimination laws concerning gender identity are in place.")
             
-            # Basic statistics
+            # Basic statistics and analysis
+            st.write("\nAnalysis:")
             st.write("Unique values:", df[col].nunique())
             st.write("Value counts with percentages:")
             value_counts = df[col].value_counts()
             total = value_counts.sum()
-            value_counts_with_percent = value_counts.apply(lambda x: f"{x} ({(x/total*100):.1f}%)")
             
             # Create a DataFrame to display with percentages
             display_df = pd.DataFrame({
-                'Value': value_counts.index,
                 'Count': value_counts.values,
+                'Value': value_counts.index,
                 'Percentage': [f"{(x/total*100):.1f}%" for x in value_counts.values]
             })
             st.dataframe(display_df)
+            
+            # Create bar chart
+            if col != 'Territory':  # Skip territory for bar chart
+                fig = px.bar(
+                    value_counts,
+                    title=f'Distribution of {col}',
+                    labels={'index': 'Value', 'value': 'Count'}
+                )
+                st.plotly_chart(fig, key=f'bar_chart_{col}')
+                
+                # Map visualization for territory-based columns
+                if col != 'Territory':
+                    st.subheader(f"{col} by Country")
+                    fig = px.choropleth(
+                        df,
+                        locations="Territory",
+                        locationmode="country names",
+                        color=col,
+                        title=f"{col} by Country",
+                        color_continuous_scale="Viridis"
+                    )
+                    st.plotly_chart(fig, key=f'map_chart_{col}')
         
             # Create bar chart
             if col != 'Territory':  # Skip territory for bar chart
