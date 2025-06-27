@@ -252,6 +252,7 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
     Interpretation:
     The results indicate a statistically significant difference in democracy scores between the two groups (t(df) = {t_stat:.2f}, p = {p_value:.4f}), with countries recognizing same-sex marriage exhibiting substantially higher average democracy scores. This result is significant at the α = 0.05 level, suggesting a strong association between democratic governance and the legal recognition of same-sex marriage.
     """)
+    "change this"
 
 # Correlation Analysis
 with st.expander("Correlation Analysis Between LGBTQ+ Rights"):
