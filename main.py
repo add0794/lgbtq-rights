@@ -20,21 +20,10 @@ Data can be found on [Kaggle](https://www.kaggle.com/datasets/wilomentena/lgbt-r
 # Dataset Overview
 st.header("Dataset Overview")
 
-num_countries = len(df['Territory'].unique())
-countries = df['Territory'].sort_values(ascending=True).unique()
-columns = df.columns.tolist()
-
-st.markdown(f"""
-### Dataset Overview
-
-**Number of Countries:** {num_countries}
-
-**Countries:**
-{', '.join(countries)}
-
-**Columns:**
-{', '.join(columns)}
-""")
+st.write("Number of countries:", len(df['Territory'].unique()))
+st.write("Countries (Descending Order):")
+st.write(df['Territory'].sort_values(ascending=True).unique())
+st.write("Columns:", df.columns.tolist())
 
 # Analyze each column
 
@@ -100,15 +89,15 @@ for col in columns:
     # Column descriptions and analysis
     if col == "Recognition of same-sex unions":
         st.write("Indicates whether a country legally recognizes same-sex unions, such as civil partnerships or domestic partnerships. This is distinct from marriage, but still grants some or many of the legal benefits associated with marriage, such as inheritance rights, hospital visitation, and tax benefits.")
-    elif col == "Same-sex marriage":
+    if col == "Same-sex marriage":
         st.write("Indicates whether same-sex marriage is legally recognized, granting full marital rights equal to those of heterosexual couples. This includes not only civil benefits but also symbolic recognition of equality under the law. As of now, less than one-third of countries allow full same-sex marriage.")
-    elif col == "Adoption by same-sex couples":
+    if col == "Adoption by same-sex couples":
         st.write("Indicates whether same-sex couples are legally allowed to adopt children. This includes joint adoption as well as second-parent or stepchild adoption. Legal barriers in many countries still prevent same-sex couples from building families with full parental rights.")
-    elif col == "LGBT people allowed to serve openly in military?":
+    if col == "LGBT people allowed to serve openly in military?":
         st.write("Indicates whether LGBTQ+ individuals are permitted to serve openly in the national armed forces without risk of expulsion, harassment, or forced concealment. In some countries, LGBTQ+ people are barred entirely; in others, they may serve but must hide their identity.")
-    elif col == "Anti-discrimination laws concerning sexual orientation":
+    if col == "Anti-discrimination laws concerning sexual orientation":
         st.write("Indicates whether a country has national laws that protect individuals from discrimination based on sexual orientation in key areas such as employment, housing, education, and access to services. These laws are essential for protecting the dignity and safety of LGBTQ+ people.")
-    elif col == "Anti-discrimination laws concerning gender identity":
+    if col == "Anti-discrimination laws concerning gender identity":
         st.write("Indicates whether a country has national laws protecting against discrimination based on gender identity. These laws are crucial for safeguarding the rights of transgender and gender nonconforming individuals in areas such as employment, healthcare, education, and housing.")
     
     # Basic statistics and analysis
@@ -134,37 +123,37 @@ for col in columns:
             labels={'index': 'Value', 'value': 'Count'}
         )
         st.plotly_chart(fig, key=f'bar_chart_{col}')
-            total = value_counts.sum()
+        total = value_counts.sum()
             
-            # Create a DataFrame to display with percentages
-            display_df = pd.DataFrame({
-                'Value': value_counts.index,
-                'Count': value_counts.values.astype(str),
-                'Percentage': [f"{(x/total*100):.1f}%" for x in value_counts.values]
-            })
-            display_df['Count'] = display_df['Count'].str.ljust(3)  # Left-justify count values
-            st.table(display_df)
+        # Create a DataFrame to display with percentages
+        display_df = pd.DataFrame({
+            'Value': value_counts.index,
+            'Count': value_counts.values.astype(str),
+            'Percentage': [f"{(x/total*100):.1f}%" for x in value_counts.values]
+        })
+        display_df['Count'] = display_df['Count'].str.ljust(3)  # Left-justify count values
+        st.table(display_df)
+        
+        # Create bar chart
+        if col != 'Territory':  # Skip territory for bar chart
+            fig = px.bar(
+                value_counts,
+                title=f'Count of {col}',
+                labels={'index': 'Value', 'value': 'Count'}
+            )
+            st.plotly_chart(fig, key=f'bar_chart_{col}')
             
-            # Create bar chart
-            if col != 'Territory':  # Skip territory for bar chart
-                fig = px.bar(
-                    value_counts,
-                    title=f'Count of {col}',
-                    labels={'index': 'Value', 'value': 'Count'}
-                )
-                st.plotly_chart(fig, key=f'bar_chart_{col}')
-                
-            # Map visualization for territory-based columns
-            if col != 'Territory':
-                fig = px.choropleth(
-                    df,
-                    locations="Territory",
-                    locationmode="country names",
-                    color=col,
-                    title=f"{col} by Country",
-                    color_continuous_scale="Viridis"
-                )
-                st.plotly_chart(fig, key=f'map_chart_{col}')
+        # Map visualization for territory-based columns
+        if col != 'Territory':
+            fig = px.choropleth(
+                df,
+                locations="Territory",
+                locationmode="country names",
+                color=col,
+                title=f"{col} by Country",
+                color_continuous_scale="Viridis"
+            )
+            st.plotly_chart(fig, key=f'map_chart_{col}')
 
 # Display countries with unknown data
 with st.expander("Countries with Unknown Data"):
