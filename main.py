@@ -6,13 +6,16 @@ import plotly.express as px
 df = pd.read_csv('lgbtq_rights_by_country.csv')
 
 # Set page configuration
-st.set_page_config(page_title="LGBTQ Rights Analysis", layout="wide")
+st.set_page_config(page_title="LGBTQ Rights in Pride Month 2025", layout="wide")
 
 # Add title and description
-st.title("LGBTQ Rights Analysis")
+st.title("Analyzing LGBTQ Rights in Pride Month 2025")
 st.write("""
-This analysis explores the LGBTQ rights dataset across different countries.
-Each section analyzes a specific aspect of LGBTQ rights.
+Pride Month is a time to honor the resilience, visibility, and progress of queer communities around the world. Over the past few decades, LGBTQ+ people have achieved significant legal and cultural milestones, especially in many Western countries, where same-sex marriage, civil unions, and adoption rights are now widely recognized. However, this progress is far from universal. In much of the Global South and in many non-Western countries, same-sex relationships remain criminalized, legal protections are minimal or nonexistent, and queer individuals often face widespread social stigma, violence, and state repression. These disparities create hostile conditions for both travel and daily life for queer people globally.
+
+As Pride comes to a close, I’ve analyzed global LGBTQ+ rights, tracking legal recognition, civil protections, and societal acceptance across regions. It highlights where progress has been made and where urgent action is still needed, emphasizing that Pride is not only a celebration, but also a call to action for global equity and human rights.
+
+Feel free to give feedback!
 """)
 
 # Create tabs for each analysis
