@@ -16,6 +16,8 @@ Pride Month is a time to honor the resilience, visibility, and progress of queer
 As Pride comes to a close, I’ve analyzed global LGBTQ+ rights, tracking legal recognition, civil protections, and societal acceptance across regions. It highlights where progress has been made and where urgent action is still needed, emphasizing that Pride is not only a celebration, but also a call to action for global equity and human rights.
 
 Feel free to give feedback!
+
+Data can be found [here](https://www.kaggle.com/datasets/wilomentena/lgbt-rights-worldwide/code)
 """)
 
 # Create tabs for each analysis
