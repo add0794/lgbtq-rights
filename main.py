@@ -17,6 +17,55 @@ Feel free to give feedback!
 Data can be found on [Kaggle](https://www.kaggle.com/datasets/wilomentena/lgbt-rights-worldwide/data) and [World Population Review](https://worldpopulationreview.com/country-rankings/democracy-index-by-country).
 """)
 
+# Country-Level Highlights
+st.header("🌍 Country-Level Highlights: Where LGBTQ+ Rights Are Improving or Regressing")
+
+# Countries Where LGBTQ+ Rights Have Improved
+st.subheader("✅ Countries Where LGBTQ+ Rights Have Improved")
+
+st.markdown("""
+**1. Estonia**  
+• In June 2023, Estonia became the **first former Soviet country** to legalize same-sex marriage and joint adoption, effective **January 1, 2024**.  
+• Estonia also recognizes legal gender changes without surgery and has broad anti-discrimination laws in place.  
+🔗 [Source](https://en.wikipedia.org/wiki/LGBT_rights_in_Estonia)
+
+**2. Greece**  
+• In **February 2024**, Greece became the **first Orthodox-majority country** to legalize same-sex marriage via parliamentary vote.  
+• In **May 2025**, the Greek Supreme Court upheld same-sex marriage and **joint adoption** as constitutional.  
+🔗 [Source](https://en.wikipedia.org/wiki/LGBT_rights_in_Greece)
+
+**3. Thailand**  
+• In **late 2024**, Thailand passed the **Marriage Equality Act**, with full implementation in **January 2025**.  
+• Same-sex couples now enjoy full marriage and adoption rights—the first such move in Southeast Asia.  
+🔗 [The Times](https://www.thetimes.co.uk/article/hundreds-same-sex-couples-marry-thailand-changes-law-6hqhqwbv3)
+""")
+
+# Countries Where LGBTQ+ Rights Have Regressed
+st.subheader("❌ Countries Where LGBTQ+ Rights Have Regressed")
+
+st.markdown("""
+**1. Hungary**  
+• In **2025**, Hungary banned the **Budapest Pride march** and passed new laws restricting LGBTQ+ content for minors, blocking gender marker changes, and limiting adoption by same-sex couples.  
+• These changes have been widely criticized by EU officials and human rights groups.  
+🔗 [Reuters – Pride Ban](https://www.reuters.com/world/hungarys-pm-orban-warns-legal-consequences-over-banned-budapest-pride-march-2025-06-27/)  
+🔗 [Reuters – LGBTQ laws](https://www.reuters.com/world/hungarys-lgbtq-community-reels-under-orbans-laws-pride-ban-2025-06-26/)
+
+**2. United Kingdom**  
+• In **April 2025**, the UK’s highest court ruled that the legal definition of "woman" refers solely to biological sex under the Equality Act.  
+• This ruling weakens legal protections for transgender women, especially in cases of employment and housing discrimination.  
+🔗 [Feminist.org](https://feminist.org/news/united-kingdom-ruling-highlights-global-rollback-of-trans-rights/)
+
+**3. United States**  
+• In **June 2025**, the US Supreme Court ruled in favor of parents opting their children out of **LGBTQ-inclusive school curricula**, citing religious liberty.  
+• Multiple states have continued to pass laws restricting access to **gender-affirming care** for minors.  
+🔗 [Time – Curriculum Ruling](https://time.com/7298359/supreme-court-lgbtq-curriculum-opt-out-religious-liberty/)  
+🔗 [WSJ – Trans Rights Rollback](https://www.wsj.com/politics/policy/transgender-rights-movement-challenges-b8de6e62)
+""")
+
+# Conclusion
+st.markdown("---")
+st.markdown("These examples highlight the global divergence in LGBTQ+ rights: while some countries are making historic strides toward equality, others are enacting laws that undermine decades of progress.")
+
 # Analyze each column
 with st.expander("Dataset Overview"):
     st.write("Number of countries:", len(df['Territory'].unique()))
@@ -26,56 +75,6 @@ with st.expander("Dataset Overview"):
     
 # Analyze each column
 columns = df.columns
-
-# Create tabs for each analysis
-
-# Add country-level highlights
-with st.header("🌍 Country-Level Highlights: Where LGBTQ+ Rights Are Improving or Regressing"):
-    st.subheader("✅ Countries Where LGBTQ+ Rights Have Improved")
-
-    st.markdown("""
-    **1. Estonia**  
-    • In June 2023, Estonia became the **first former Soviet country** to legalize same-sex marriage and joint adoption, effective **January 1, 2024**.  
-    • Estonia also recognizes legal gender changes without surgery and has broad anti-discrimination laws in place.  
-    🔗 [Source](https://en.wikipedia.org/wiki/LGBT_rights_in_Estonia)
-
-    **2. Greece**  
-    • In **February 2024**, Greece became the **first Orthodox-majority country** to legalize same-sex marriage via parliamentary vote.  
-    • In **May 2025**, the Greek Supreme Court upheld same-sex marriage and **joint adoption** as constitutional.  
-    🔗 [Source](https://en.wikipedia.org/wiki/LGBT_rights_in_Greece)
-
-    **3. Thailand**  
-    • In **late 2024**, Thailand passed the **Marriage Equality Act**, with full implementation in **January 2025**.  
-    • Same-sex couples now enjoy full marriage and adoption rights—the first such move in Southeast Asia.  
-    🔗 [The Times](https://www.thetimes.co.uk/article/hundreds-same-sex-couples-marry-thailand-changes-law-6hqhqwbv3)
-    """)
-
-    st.subheader("❌ Countries Where LGBTQ+ Rights Have Regressed")
-
-    st.markdown("""
-    **1. Hungary**  
-    • In **2025**, Hungary banned the **Budapest Pride march** and passed new laws restricting LGBTQ+ content for minors, blocking gender marker changes, and limiting adoption by same-sex couples.  
-    • These changes have been widely criticized by EU officials and human rights groups.  
-    🔗 [Reuters – Pride Ban](https://www.reuters.com/world/hungarys-pm-orban-warns-legal-consequences-over-banned-budapest-pride-march-2025-06-27/)  
-    🔗 [Reuters – LGBTQ laws](https://www.reuters.com/world/hungarys-lgbtq-community-reels-under-orbans-laws-pride-ban-2025-06-26/)
-
-    **2. United Kingdom**  
-    • In **April 2025**, the UK’s highest court ruled that the legal definition of "woman" refers solely to biological sex under the Equality Act.  
-    • This ruling weakens legal protections for transgender women, especially in cases of employment and housing discrimination.  
-    🔗 [Feminist.org](https://feminist.org/news/united-kingdom-ruling-highlights-global-rollback-of-trans-rights/)
-
-    **3. United States**  
-    • In **June 2025**, the US Supreme Court ruled in favor of parents opting their children out of **LGBTQ-inclusive school curricula**, citing religious liberty.  
-    • Multiple states have continued to pass laws restricting access to **gender-affirming care** for minors.  
-    🔗 [Time – Curriculum Ruling](https://time.com/7298359/supreme-court-lgbtq-curriculum-opt-out-religious-liberty/)  
-    🔗 [WSJ – Trans Rights Rollback](https://www.wsj.com/politics/policy/transgender-rights-movement-challenges-b8de6e62)
-    """)
-
-    st.markdown("---")
-    st.markdown("These examples highlight the global divergence in LGBTQ+ rights: while some countries are making historic strides toward equality, others are enacting laws that undermine decades of progress.")
-
-
-# Create visualizations
 
 for col in columns:
     if col == 'Territory' or col == 'Same-sex sexual activity':
