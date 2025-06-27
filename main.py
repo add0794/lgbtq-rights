@@ -103,7 +103,7 @@ with st.expander("Countries with Unknown Data"):
     
     # Display number of countries with unknown data
     num_countries_with_unknown = len(unknown_data_dict)
-    
+
     st.write(f"The following countries have unknown data for some rights: {num_countries_with_unknown}")
     # Display unknown data dictionary
     st.write(unknown_data_dict)
@@ -116,7 +116,7 @@ with st.expander("Countries with Unknown Data"):
         locations="Territory",
         locationmode="country names",
         color="Unknown Rights",
-        title="Number of Unknown Rights by Country",
+        title="Most countries have known data for LGBTQ+ rights",  
         color_continuous_scale="Viridis",
         hover_data=['Territory', 'Unknown Rights']
     )
