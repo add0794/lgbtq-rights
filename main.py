@@ -7,9 +7,8 @@ from scipy.stats import ttest_ind
 df = pd.read_csv('lgbtq_rights_by_country.csv')
 
 # Add title and description
-st.title("LGBTQ Rights in 2025")
+st.title("LGBTQ+ Rights in 2025: A Global Snapshot")
 st.write("""
-### LGBTQ+ Rights in 2025: A Global Snapshot
 Pride Month serves not only as a celebration of resilience, visibility, and identity, but also as a moment to reflect on the global state of LGBTQ+ rights. In recent decades, queer communities—particularly in Western democracies—have made notable legal and cultural advances, including the legalization of same-sex marriage, civil unions, and adoption rights. However, these gains are not evenly distributed. Across much of the Global South and many non-Western regions, same-sex relationships remain criminalized, legal protections are weak or absent, and queer individuals continue to face systemic discrimination, violence, and state-sponsored repression.
 
 To assess the current landscape, I conducted an analysis of LGBTQ+ rights worldwide using publicly available datasets. This work highlights the stark disparities between regions and underscores the need for continued advocacy and policy change.
