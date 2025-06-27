@@ -91,16 +91,19 @@ for col in columns:
 # Display countries with unknown data
 with st.expander("Countries with Unknown Data"):
     st.write("The following countries have unknown data for some rights:")
-    unknown_data = df[df.isin(['Unknown']).any(axis=1)]
-    unknown_countries = unknown_data['Territory'].unique()
-    st.write("Countries:", unknown_countries.tolist())
     
-    # Show which rights are unknown for each country
-    for country in unknown_countries:
-        st.subheader(country)
-        unknown_rights = unknown_data[unknown_data['Territory'] == country]
-        unknown_columns = unknown_rights.columns[unknown_rights.isin(['Unknown']).any()]
-        st.write("Unknown rights:", unknown_columns.tolist())
+    # Create dictionary to store unknown data
+    unknown_data_dict = {}
+    
+    # Process unknown data
+    for _, row in df.iterrows():
+        country = row['Territory']
+        unknown_rights = [col for col in df.columns if row[col] == 'Unknown']
+        if unknown_rights:
+            unknown_data_dict[country] = unknown_rights
+    
+    # Display unknown data dictionary
+    st.write(unknown_data_dict)
 
     # Add choropleth map of unknown data distribution
     st.subheader("Distribution of Unknown Data")
