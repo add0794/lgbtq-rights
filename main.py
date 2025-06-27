@@ -239,47 +239,47 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
     - Result: The difference in democracy scores is {"statistically significant" if p_value < 0.05 else "not statistically significant"} (α=0.05)
     """)
 
-    # Correlation Analysis
-    with st.expander("Correlation Analysis Between LGBTQ+ Rights"):
-        # st.markdown("""
-        # This heatmap shows the relationships between different LGBTQ+ rights across countries. 
-        # A positive correlation means that countries that have one right are more likely to have the other.
-        # A negative correlation means that countries that have one right are less likely to have the other.
-        # """)
+# Correlation Analysis
+with st.expander("Correlation Analysis Between LGBTQ+ Rights"):
+    # st.markdown("""
+    # This heatmap shows the relationships between different LGBTQ+ rights across countries. 
+    # A positive correlation means that countries that have one right are more likely to have the other.
+    # A negative correlation means that countries that have one right are less likely to have the other.
+    # """)
 
-        # Select columns for correlation analysis (excluding non-binary columns)
-        analysis_columns = ['Same-sex marriage', 'Recognition of same-sex unions', 
-                          'Adoption by same-sex couples', 
-                          'LGBT people allowed to serve openly in military?',
-                          'Anti-discrimination laws concerning sexual orientation',
-                          'Laws concerning gender identity/expression']
-        
-        # Convert Yes/No to binary values
-        binary_df = df[analysis_columns].replace({'Yes': 1, 'No': 0, 'Unknown': None})
-        
-        # Calculate correlation matrix
-        corr_matrix = binary_df.corr()
-        
-        # Create interactive heatmap
-        fig = px.imshow(
-            corr_matrix,
-            color_continuous_scale='RdBu',
-            range_color=[0, 1],
-            color_continuous_midpoint=0.5  # Center the color scale at 0.5
-        )
-        
-        # Update layout for better interactivity
-        fig.update_layout(
-            hovermode='closest',
-            clickmode='event+select',
-            dragmode='select'
-        )
-        
-        # Update colorbar
-        fig.update_coloraxes(
-            showscale=True,
-            colorbar_title_text='Correlation',
-            colorbar_title_side='right'
-        )
-        
-        st.plotly_chart(fig, key='correlation_heatmap')
+    # Select columns for correlation analysis (excluding non-binary columns)
+    analysis_columns = ['Same-sex marriage', 'Recognition of same-sex unions', 
+                        'Adoption by same-sex couples', 
+                        'LGBT people allowed to serve openly in military?',
+                        'Anti-discrimination laws concerning sexual orientation',
+                        'Laws concerning gender identity/expression']
+    
+    # Convert Yes/No to binary values
+    binary_df = df[analysis_columns].replace({'Yes': 1, 'No': 0, 'Unknown': None})
+    
+    # Calculate correlation matrix
+    corr_matrix = binary_df.corr()
+    
+    # Create interactive heatmap
+    fig = px.imshow(
+        corr_matrix,
+        color_continuous_scale='RdBu',
+        range_color=[0, 1],
+        color_continuous_midpoint=0.5  # Center the color scale at 0.5
+    )
+    
+    # Update layout for better interactivity
+    fig.update_layout(
+        hovermode='closest',
+        clickmode='event+select',
+        dragmode='select'
+    )
+    
+    # Update colorbar
+    fig.update_coloraxes(
+        showscale=True,
+        colorbar_title_text='Correlation',
+        colorbar_title_side='right'
+    )
+    
+    st.plotly_chart(fig, key='correlation_heatmap')
