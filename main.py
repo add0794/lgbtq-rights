@@ -18,7 +18,7 @@ Data can be found on [Kaggle](https://www.kaggle.com/datasets/wilomentena/lgbt-r
 """)
 
 # Analyze each column
-with st.header("Dataset Overview"):
+with st.expander("Dataset Overview"):
     st.write("Number of countries:", len(df['Territory'].unique()))
     st.write("Countries (Descending Order):")
     st.write(df['Territory'].sort_values(ascending=True).unique())
