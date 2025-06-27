@@ -28,7 +28,7 @@ columns = df.columns
 # Create visualizations
 
 for col in columns:
-    if col == 'Territory':
+    if col == 'Territory' or col == 'Same-sex sexual activity':
         continue
     else:
         with st.expander(f"Analysis of {col}"):
@@ -36,9 +36,11 @@ for col in columns:
             
             # Basic statistics
             st.write("Unique values:", df[col].nunique())
-            st.write("Value counts:")
+            st.write("Value counts with percentages:")
             value_counts = df[col].value_counts()
-            st.write(value_counts)
+            total = value_counts.sum()
+            value_counts_with_percent = value_counts.apply(lambda x: f"{x} ({(x/total*100):.1f}%)")
+            st.write(value_counts_with_percent)
         
             # Create bar chart
             if col != 'Territory':  # Skip territory for bar chart
