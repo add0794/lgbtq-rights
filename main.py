@@ -212,7 +212,7 @@ for i, row in avg_scores.iterrows():
         yshift=10
     )
 
-st.plotly_chart(fig, key='democracy_bar_chart')
+st.plotly_chart(fig, key='democracy_bar_chart_1')
     
 # Run t-test
     
@@ -239,4 +239,4 @@ st.markdown(f"""
 - Result: The difference in democracy scores is {"statistically significant" if p_value < 0.05 else "not statistically significant"} (α=0.05)
 """)
 
-st.plotly_chart(fig, key='democracy_bar_chart')
+st.plotly_chart(fig, key='democracy_bar_chart_2')
