@@ -115,7 +115,7 @@ columns = df.columns
 st.header("Column Analysis")
 
 for column in columns:
-    if column == 'Territory' or column == 'Same-sex sexual activity':
+    if column == 'Territory' or column == 'Same-sex sexual activity' or column == 'Unknown Rights':
         continue
     
     st.subheader(column)
@@ -176,6 +176,12 @@ try:
     marriage_not_allowed = merged_df[merged_df['Same-sex marriage'] == 'No']['Democracy Index'].mean()
     
     # Create DataFrame for visualization
+except FileNotFoundError:
+    st.error("Democracy index CSV file not found. Please make sure 'democracy_index.csv' is in the same directory.")
+except pd.errors.EmptyDataError:
+    st.error("The democracy index CSV file is empty.")
+except Exception as e:
+    st.error(f"An error occurred while processing the democracy index data: {str(e)}")
     avg_scores = pd.DataFrame({
         'Group': ['Same-sex marriage allowed', 'Same-sex marriage not allowed'],
         'Average Democracy Score': [marriage_allowed, marriage_not_allowed]
