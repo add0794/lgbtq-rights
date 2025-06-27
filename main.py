@@ -43,7 +43,7 @@ with st.expander("Visualizations"):
         title=f'Distribution of {selected_column}',
         labels={'index': 'Status', 'value': 'Count'}
     )
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, key=f'bar_chart_{selected_column}')
     
     # Create map visualization
     st.subheader(f"{selected_column} by Country")
@@ -55,7 +55,7 @@ with st.expander("Visualizations"):
         title=f"{selected_column} by Country",
         color_continuous_scale="Viridis"
     )
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, key=f'map_chart_{selected_column}')
 
 for col in columns:
     if col == 'Territory':
