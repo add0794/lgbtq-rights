@@ -9,24 +9,37 @@ df = pd.read_csv('lgbtq_rights_by_country.csv')
 # Add title and description
 st.title("LGBTQ Rights in 2025")
 st.write("""
-Pride Month is a time to honor the resilience, visibility, and progress of queer communities around the world. Over the past few decades, LGBTQ+ people have achieved significant legal and cultural milestones, especially in many Western countries, where same-sex marriage, civil unions, and adoption rights are now widely recognized. However, this progress is far from universal. In much of the Global South and in many non-Western countries, same-sex relationships remain criminalized, legal protections are minimal or nonexistent, and queer individuals often face widespread social stigma, violence, and state repression. These disparities create hostile conditions for both travel and daily life for queer people globally.
+LGBTQ+ Rights in 2025: A Global Snapshot
+Pride Month serves not only as a celebration of resilience, visibility, and identity, but also as a moment to reflect on the global state of LGBTQ+ rights. In recent decades, queer communities—particularly in Western democracies—have made notable legal and cultural advances, including the legalization of same-sex marriage, civil unions, and adoption rights. However, these gains are not evenly distributed. Across much of the Global South and many non-Western regions, same-sex relationships remain criminalized, legal protections are weak or absent, and queer individuals continue to face systemic discrimination, violence, and state-sponsored repression.
 
-As Pride comes to a close, I’ve analyzed global LGBTQ+ rights, tracking legal recognition, civil protections, and societal acceptance across regions. It highlights where progress has been made and where urgent action is still needed, emphasizing that Pride is not only a celebration, but also a call to action for global equity and human rights.
+To assess the current landscape, I conducted an analysis of LGBTQ+ rights worldwide using publicly available datasets. This work highlights the stark disparities between regions and underscores the need for continued advocacy and policy change.
 
-I've taken a look at several indicators:
-- dataset overview: dataset overview and unknown data.
-- progress and setbacks in LGBTQ+ rights.
-- distribution of various indicators, including same-sex marriage, adoption by same-sex couples, and anti-discrimination laws around the world.
-- country-level analysis: correlation between democracy scores and LGBTQ+ rights.
+Methodology and Indicators Analyzed
+The dataset includes country-level data on:
 
-I've made some observations:
-- The West is leading the way in LGBTQ+ rights, with many countries allowing same-sex marriage and adoption by same-sex couples.
-- The Global South is lagging behind, with many countries criminalizing same-sex relationships and providing minimal legal protections.
-- There is a correlation between democracy scores and LGBTQ+ rights, with countries with higher democracy scores tending to have more LGBTQ+ rights.
+Legal recognition of same-sex unions and marriages
 
-We certainly have much to do to ensure LGBTQ+ rights are protected around the world.
+Adoption rights for same-sex couples
 
-Data can be found on [Kaggle](https://www.kaggle.com/datasets/wilomentena/lgbt-rights-worldwide/data) and [World Population Review](https://worldpopulationreview.com/country-rankings/democracy-index-by-country).
+Military service eligibility for LGBTQ+ individuals
+
+Anti-discrimination protections based on sexual orientation and gender identity
+
+Democracy scores, used to explore correlations with legal protections
+
+Key Insights
+Western democracies are leading in rights recognition, with widespread legalization of same-sex marriage and joint adoption.
+
+Countries in the Global South continue to lag behind, with many still criminalizing same-sex activity and offering little to no legal protection.
+
+A strong positive correlation was found between a country's democracy score and its level of LGBTQ+ rights recognition. Countries with higher democratic indices are significantly more likely to uphold protections and recognition for queer individuals.
+
+Progress is not linear: While some countries are advancing rapidly, others are experiencing legal and social regression in LGBTQ+ rights.
+
+Conclusion
+The findings make clear that while important strides have been made, global equity for LGBTQ+ people remains far from achieved. As Pride Month concludes, this analysis reaffirms that Pride must remain both a celebration and a call to action—for universal dignity, safety, and equality.
+
+Data sources: [Kaggle](https://www.kaggle.com/datasets/wilomentena/lgbt-rights-worldwide/data) and [World Population Review](https://worldpopulationreview.com/country-rankings/democracy-index-by-country).
 """)
 
 # Dataset Overview
