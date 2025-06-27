@@ -17,6 +17,13 @@ Feel free to give feedback!
 Data can be found on [Kaggle](https://www.kaggle.com/datasets/wilomentena/lgbt-rights-worldwide/data) and [World Population Review](https://worldpopulationreview.com/country-rankings/democracy-index-by-country).
 """)
 
+# Analyze each column
+with st.header("Dataset Overview"):
+    st.write("Number of countries:", len(df['Territory'].unique()))
+    st.write("Countries (Descending Order):")
+    st.write(df['Territory'].sort_values(ascending=True).unique())
+    st.write("Columns:", df.columns.tolist())
+
 # Country-Level Highlights
 st.header("🌍 Country-Level Highlights: Where LGBTQ+ Rights Are Improving or Regressing")
 
@@ -65,13 +72,6 @@ st.markdown("""
 # Conclusion
 st.markdown("---")
 st.markdown("These examples highlight the global divergence in LGBTQ+ rights: while some countries are making historic strides toward equality, others are enacting laws that undermine decades of progress.")
-
-# Analyze each column
-st.header("Dataset Overview")
-st.write("Number of countries:", len(df['Territory'].unique()))
-st.write("Countries (Descending Order):")
-st.write(df['Territory'].sort_values(ascending=True).unique())
-st.write("Columns:", df.columns.tolist())
     
 # Analyze each column
 columns = df.columns
