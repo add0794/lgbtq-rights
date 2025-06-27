@@ -47,6 +47,24 @@ columns = df.columns
 # Add country-level highlights
 with st.expander("🌍 Country-Level Highlights: Where LGBTQ+ Rights Are Improving or Regressing"):
     st.subheader("✅ Countries Where LGBTQ+ Rights Have Improved")
+    # ... rest of the existing content ...
+
+# Add countries with no democracy index
+with st.expander("Countries with No Democracy Index Data"):
+    st.subheader("Countries with No Democracy Index Data")
+    
+    # Get countries with democracy index of 0
+    no_democracy_countries = df[df['Democracy Index'] == 0]['Territory'].unique()
+    
+    if len(no_democracy_countries) > 0:
+        st.write("These countries have no democracy index data available:")
+        st.write(no_democracy_countries)
+    else:
+        st.write("All countries have democracy index data available.")
+
+# Add insights
+with st.expander("Insights"):
+    st.subheader("✅ Countries Where LGBTQ+ Rights Have Improved")
 
     st.markdown("""
     **1. Estonia**  
