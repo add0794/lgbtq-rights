@@ -60,11 +60,11 @@ for col in columns:
             
             # Create a DataFrame to display with percentages
             display_df = pd.DataFrame({
-                'Value': value_counts.index,
                 'Count': value_counts.values,
+                'Value': value_counts.index,
                 'Percentage': [f"{(x/total*100):.1f}%" for x in value_counts.values]
             })
-            st.dataframe(display_df)
+            st.table(display_df)
             
             # Create bar chart
             if col != 'Territory':  # Skip territory for bar chart
