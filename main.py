@@ -88,44 +88,7 @@ with st.expander("🌍 Country-Level Highlights: Where LGBTQ+ Rights Are Improvi
     st.markdown("---")
     st.markdown("These examples highlight the global divergence in LGBTQ+ rights: while some countries are making historic strides toward equality, others are enacting laws that undermine decades of progress.")
 
-# Add insights
-with st.expander("Insights"):
-    st.subheader("Insights about Same-Sex Marriage and Democracy")
-    
-    # Calculate average democracy scores
-    marriage_countries = df[df['Same-sex marriage'] == 'Yes']
-    no_marriage_countries = df[df['Same-sex marriage'] == 'No']
-    
-    # Convert democracy index values to numeric
-    marriage_countries['Democracy Index'] = pd.to_numeric(marriage_countries['Democracy Index'], errors='coerce')
-    no_marriage_countries['Democracy Index'] = pd.to_numeric(no_marriage_countries['Democracy Index'], errors='coerce')
-    
-    # Calculate means
-    avg_marriage_score = marriage_countries['Democracy Index'].mean()
-    avg_no_marriage_score = no_marriage_countries['Democracy Index'].mean()
-    
-    # Handle NaN values
-    avg_marriage_score = avg_marriage_score if pd.notna(avg_marriage_score) else 0
-    avg_no_marriage_score = avg_no_marriage_score if pd.notna(avg_no_marriage_score) else 0
-    
-    st.write(f"Average democracy score for countries with same-sex marriage: {avg_marriage_score:.2f}")
-    st.write(f"Average democracy score for countries without same-sex marriage: {avg_no_marriage_score:.2f}")
-    
-    # Create bar chart
-    insight_data = pd.DataFrame({
-        'Group': ['With Same-Sex Marriage', 'Without Same-Sex Marriage'],
-        'Average Democracy Score': [avg_marriage_score, avg_no_marriage_score]
-    })
-    
-    fig = px.bar(
-        insight_data,
-        x='Group',
-        y='Average Democracy Score',
-        title='Average Democracy Scores by Same-Sex Marriage Status',
-        color='Group',
-        labels={'Group': 'Country Group', 'Average Democracy Score': 'Democracy Score'}
-    )
-    st.plotly_chart(fig)
+
 
 # Create visualizations
 
