@@ -228,9 +228,6 @@ st.markdown(f"""
 - Difference: {marriage_allowed - marriage_not_allowed:.2f} points
 """)
 
-# Import scipy only when needed
-from scipy.stats import ttest_ind
-
 # Run two-sample t-test
 t_stat, p_value = ttest_ind(scores_with_marriage, scores_without_marriage, equal_var=False)
 
