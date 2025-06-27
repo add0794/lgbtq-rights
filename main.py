@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 
 # Read the dataset directly from the CSV file
-df = pd.read_csv('/Users/alexdubro/.cache/kagglehub/datasets/wilomentena/lgbt-rights-worldwide/versions/2/lgbtq_rights_by_country.csv')
+df = pd.read_csv('lgbtq_rights_by_country.csv')
 
 # Set page configuration
 st.set_page_config(page_title="LGBTQ Rights Analysis", layout="wide")
