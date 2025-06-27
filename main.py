@@ -24,6 +24,41 @@ with st.expander("Dataset Overview"):
     st.write(df['Territory'].sort_values(ascending=True).unique())
     st.write("Columns:", df.columns.tolist())
 
+
+# Display countries with unknown data
+with st.expander("Countries with Unknown Data"):
+    
+    # Create dictionary to store unknown data
+    unknown_data_dict = {}
+    
+    # Process unknown data
+    for _, row in df.iterrows():
+        country = row['Territory']
+        unknown_rights = [col for col in df.columns if row[col] == 'Unknown']
+        if unknown_rights:
+            unknown_data_dict[country] = unknown_rights
+    
+    # Display number of countries with unknown data
+    num_countries_with_unknown = len(unknown_data_dict)
+
+    st.write(f"The following countries have unknown data for some rights: {num_countries_with_unknown}")
+    # Display unknown data dictionary
+    st.write(unknown_data_dict)
+
+    # Add choropleth map of unknown data distribution
+    st.subheader("Distribution of Unknown Data")
+    df['Unknown Rights'] = df.apply(lambda row: sum(row == 'Unknown'), axis=1)
+    fig = px.choropleth(
+        df,
+        locations="Territory",
+        locationmode="country names",
+        color="Unknown Rights",
+        title="Most countries have known data for LGBTQ+ rights",  
+        color_continuous_scale="Viridis",
+        hover_data=['Territory', 'Unknown Rights']
+    )
+    st.plotly_chart(fig)
+
 # Analyze each column
 
 # Country-Level Highlights
@@ -133,36 +168,9 @@ for col in columns:
     )
     st.plotly_chart(fig, key=f'map_chart_{col}')
 
-# Display countries with unknown data
-with st.expander("Countries with Unknown Data"):
-    
-    # Create dictionary to store unknown data
-    unknown_data_dict = {}
-    
-    # Process unknown data
-    for _, row in df.iterrows():
-        country = row['Territory']
-        unknown_rights = [col for col in df.columns if row[col] == 'Unknown']
-        if unknown_rights:
-            unknown_data_dict[country] = unknown_rights
-    
-    # Display number of countries with unknown data
-    num_countries_with_unknown = len(unknown_data_dict)
+with st.expander("Insights"):
+    st.markdown("""
+### Insight: Same-sex Marriage and Democracy
 
-    st.write(f"The following countries have unknown data for some rights: {num_countries_with_unknown}")
-    # Display unknown data dictionary
-    st.write(unknown_data_dict)
-
-    # Add choropleth map of unknown data distribution
-    st.subheader("Distribution of Unknown Data")
-    df['Unknown Rights'] = df.apply(lambda row: sum(row == 'Unknown'), axis=1)
-    fig = px.choropleth(
-        df,
-        locations="Territory",
-        locationmode="country names",
-        color="Unknown Rights",
-        title="Most countries have known data for LGBTQ+ rights",  
-        color_continuous_scale="Viridis",
-        hover_data=['Territory', 'Unknown Rights']
-    )
-    st.plotly_chart(fig)
+Countries that allow same-sex marriage tend to have higher democracy scores on average, indicating a correlation between LGBTQ+ rights and democratic governance.
+""")
