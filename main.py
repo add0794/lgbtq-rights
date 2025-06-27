@@ -105,65 +105,6 @@ with st.expander("🌍 Country-Level Highlights: Where LGBTQ+ Rights Are Improvi
     with st.expander("Conclusion"):
         st.markdown("These examples highlight the global divergence in LGBTQ+ rights: while some countries are making historic strides toward equality, others are enacting laws that undermine decades of progress.")
 
-with st.expander("Column Analysis"):
-    columns = df.columns
-    # Create tabs for each column
-    with st.expander("Column Analysis Tabs"):
-        column_tabs = st.tabs([col for col in columns if col not in ['Territory', 'Same-sex sexual activity', 'Unknown Rights']])
-        
-        for tab, column in zip(column_tabs, [col for col in columns if col not in ['Territory', 'Same-sex sexual activity', 'Unknown Rights']]):
-            with tab:
-                st.subheader(column)
-                
-                # Column descriptions and analysis
-                if column == "Recognition of same-sex unions":
-                    st.write("Indicates whether a country legally recognizes same-sex unions, such as civil partnerships or domestic partnerships. This is distinct from marriage, but still grants some or many of the legal benefits associated with marriage, such as inheritance rights, hospital visitation, and tax benefits.")
-                if column == "Same-sex marriage":
-                    st.write("Indicates whether same-sex marriage is legally recognized, granting full marital rights equal to those of heterosexual couples. This includes not only civil benefits but also symbolic recognition of equality under the law. As of now, less than one-third of countries allow full same-sex marriage.")
-                if column == "Adoption by same-sex couples":
-                    st.write("Indicates whether same-sex couples are legally allowed to adopt children. This includes joint adoption as well as second-parent or stepchild adoption. Legal barriers in many countries still prevent same-sex couples from building families with full parental rights.")
-                if column == "LGBT people allowed to serve openly in military?":
-                    st.write("Indicates whether LGBTQ+ individuals are permitted to serve openly in the national armed forces without risk of expulsion, harassment, or forced concealment. In some countries, LGBTQ+ people are barred entirely; in others, they may serve but must hide their identity.")
-                if column == "Anti-discrimination laws concerning sexual orientation":
-                    st.write("Indicates whether a country has national laws that protect individuals from discrimination based on sexual orientation in key areas such as employment, housing, education, and access to services. These laws are essential for protecting the dignity and safety of LGBTQ+ people.")
-                if column == "Anti-discrimination laws concerning gender identity":
-                    st.write("Indicates whether a country has national laws protecting against discrimination based on gender identity. These laws are crucial for safeguarding the rights of transgender and gender nonconforming individuals in areas such as employment, healthcare, education, and housing.")
-                
-                # Basic statistics and analysis
-                st.write("Unique values:", df[column].nunique())
-                st.write("Value counts with percentages:")
-                value_counts = df[column].value_counts()
-                total = value_counts.sum()
-                
-                # Create a DataFrame to display with percentages
-                display_df = pd.DataFrame({
-                    'Value': value_counts.index,
-                    'Count': value_counts.values.astype(str),
-                    'Percentage': [f"{(x/total*100):.1f}%" for x in value_counts.values]
-                })
-                display_df['Count'] = display_df['Count'].str.ljust(3)  # Left-justify count values
-                st.table(display_df)
-
-                # Create bar chart
-                fig = px.bar(
-                    value_counts,
-                    title=f'Count',
-                    labels={'index': 'Value', 'value': 'Count'}
-                )
-                st.plotly_chart(fig, key=f'bar_chart_{column}')
-                
-                # Create map visualization
-                fig = px.choropleth(
-                    df,
-                    locations="Territory",
-                    locationmode="country names",
-                    color=column,
-                    title=f"Global Distribution of {column}",
-                    color_continuous_scale="Viridis",
-                    hover_data=['Territory', column]
-                )
-                st.plotly_chart(fig, key=f'map_{column}')
-
 # Create tabs for each column
 with st.expander("Column Analysis Tabs"):
     column_tabs = st.tabs([col for col in columns if col not in ['Territory', 'Same-sex sexual activity', 'Unknown Rights']])
@@ -221,47 +162,50 @@ with st.expander("Column Analysis Tabs"):
             )
             st.plotly_chart(fig, key=f'map_{column}')
 
-st.markdown("""
-### Insight: Same-sex Marriage and Democracy
+with st.expander("Same-sex Marriage and Democracy Analysis"):
+    st.markdown("""
+    Countries that allow same-sex marriage tend to have higher democracy scores on average, indicating a statistically significant correlation between LGBTQ+ rights and democratic governance.
+    
+    Data Analysis:
+    - Average democracy scores for countries with and without same-sex marriage
+    - Visualization of the relationship between marriage rights and democracy
+    """)
 
-Countries that allow same-sex marriage tend to have higher democracy scores on average, indicating a statistically significant correlation between LGBTQ+ rights and democratic governance.
-""")
+    # Read democracy index data
+    democracy_df = pd.read_csv('democracy_index.csv')
 
-# Read democracy index data
-democracy_df = pd.read_csv('democracy_index.csv')
+    # Merge datasets on country name
+    merged_df = pd.merge(df, democracy_df, left_on='Territory', right_on='Country', how='inner')
 
-# Merge datasets on country name
-merged_df = pd.merge(df, democracy_df, left_on='Territory', right_on='Country', how='inner')
+    # Calculate average democracy scores for countries with and without same-sex marriage
+    marriage_allowed = merged_df[merged_df['Same-sex marriage'] == 'Yes']['Democracy Index'].mean()
+    marriage_not_allowed = merged_df[merged_df['Same-sex marriage'] == 'No']['Democracy Index'].mean()
 
-# Calculate average democracy scores for countries with and without same-sex marriage
-marriage_allowed = merged_df[merged_df['Same-sex marriage'] == 'Yes']['Democracy Index'].mean()
-marriage_not_allowed = merged_df[merged_df['Same-sex marriage'] == 'No']['Democracy Index'].mean()
+    # Create DataFrame for visualization
+    avg_scores = pd.DataFrame({
+        'Group': ['Same-sex marriage allowed', 'Same-sex marriage not allowed'],
+        'Average Democracy Score': [marriage_allowed, marriage_not_allowed]
+    })
 
-# Create DataFrame for visualization
-avg_scores = pd.DataFrame({
-    'Group': ['Same-sex marriage allowed', 'Same-sex marriage not allowed'],
-    'Average Democracy Score': [marriage_allowed, marriage_not_allowed]
-})
-
-# Create bar chart
-fig = px.bar(
-    avg_scores,
-    x='Group',
-    y='Average Democracy Score',
-    title='Average Democracy Scores by Same-sex Marriage Status',
-    color='Group',
-    color_discrete_sequence=['#636EFA', '#EF553B']
-)
-
-# Add text labels
-for i, row in avg_scores.iterrows():
-    fig.add_annotation(
-        x=row['Group'],
-        y=row['Average Democracy Score'],
-        text=f"{row['Average Democracy Score']:.2f}",
-        showarrow=False,
-        yshift=10
+    # Create bar chart
+    fig = px.bar(
+        avg_scores,
+        x='Group',
+        y='Average Democracy Score',
+        title='Average Democracy Scores by Same-sex Marriage Status',
+        color='Group',
+        color_discrete_sequence=['#636EFA', '#EF553B']
     )
+
+    # Add text labels
+    for i, row in avg_scores.iterrows():
+        fig.add_annotation(
+            x=row['Group'],
+            y=row['Average Democracy Score'],
+            text=f"{row['Average Democracy Score']:.2f}",
+            showarrow=False,
+            yshift=10
+        )
 
 st.plotly_chart(fig, key='democracy_bar_chart_1')
     
