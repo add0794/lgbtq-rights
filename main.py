@@ -116,44 +116,23 @@ for col in columns:
     st.table(display_df)
     
     # Create bar chart
-    if col != 'Territory':  # Skip territory for bar chart
-        fig = px.bar(
-            value_counts,
-            title=f'Count of {col}',
-            labels={'index': 'Value', 'value': 'Count'}
-        )
-        st.plotly_chart(fig, key=f'bar_chart_{col}')
-        total = value_counts.sum()
-            
-        # Create a DataFrame to display with percentages
-        display_df = pd.DataFrame({
-            'Value': value_counts.index,
-            'Count': value_counts.values.astype(str),
-            'Percentage': [f"{(x/total*100):.1f}%" for x in value_counts.values]
-        })
-        display_df['Count'] = display_df['Count'].str.ljust(3)  # Left-justify count values
-        st.table(display_df)
+    fig = px.bar(
+        value_counts,
+        title=f'Count of {col}',
+        labels={'index': 'Value', 'value': 'Count'}
+    )
+    st.plotly_chart(fig, key=f'bar_chart_{col}')
         
-        # Create bar chart
-        if col != 'Territory':  # Skip territory for bar chart
-            fig = px.bar(
-                value_counts,
-                title=f'Count of {col}',
-                labels={'index': 'Value', 'value': 'Count'}
-            )
-            st.plotly_chart(fig, key=f'bar_chart_{col}')
-            
-        # Map visualization for territory-based columns
-        if col != 'Territory':
-            fig = px.choropleth(
-                df,
-                locations="Territory",
-                locationmode="country names",
-                color=col,
-                title=f"{col} by Country",
-                color_continuous_scale="Viridis"
-            )
-            st.plotly_chart(fig, key=f'map_chart_{col}')
+    # Map visualization for territory-based columns
+    fig = px.choropleth(
+        df,
+        locations="Territory",
+        locationmode="country names",
+        color=col,
+        title=f"{col} by Country",
+        color_continuous_scale="Viridis"
+    )
+    st.plotly_chart(fig, key=f'map_chart_{col}')
 
 # Display countries with unknown data
 with st.expander("Countries with Unknown Data"):
