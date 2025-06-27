@@ -13,7 +13,7 @@ st.title("LGBTQ Rights in 2025")
 st.write("""
 Pride Month is a time to honor the resilience, visibility, and progress of queer communities around the world. Over the past few decades, LGBTQ+ people have achieved significant legal and cultural milestones, especially in many Western countries, where same-sex marriage, civil unions, and adoption rights are now widely recognized. However, this progress is far from universal. In much of the Global South and in many non-Western countries, same-sex relationships remain criminalized, legal protections are minimal or nonexistent, and queer individuals often face widespread social stigma, violence, and state repression. These disparities create hostile conditions for both travel and daily life for queer people globally.
 
-As Pride 2025 comes to a close, I’ve analyzed global LGBTQ+ rights, tracking legal recognition, civil protections, and societal acceptance across regions. It highlights where progress has been made and where urgent action is still needed, emphasizing that Pride is not only a celebration, but also a call to action for global equity and human rights.
+As Pride comes to a close, I’ve analyzed global LGBTQ+ rights, tracking legal recognition, civil protections, and societal acceptance across regions. It highlights where progress has been made and where urgent action is still needed, emphasizing that Pride is not only a celebration, but also a call to action for global equity and human rights.
 
 Feel free to give feedback!
 
@@ -68,23 +68,47 @@ for col in columns:
             st.table(display_df)
             
             # Create bar chart
-            fig = px.bar(
-                value_counts,
-                title=f'Distribution of {col}',
-                labels={'index': 'Value', 'value': 'Count'}
-            )
-            st.plotly_chart(fig, key=f'bar_chart_{col}')
-            
-            # Map visualization
-            st.write("Map visualization:")
-            # Create a map using plotly
-            fig = px.choropleth(
-                df,
-                locations="Territory",
-                locationmode="country names",
-                color=col,
-                title=f"{col} by Country",
-                color_continuous_scale="Viridis"
-            )
-            st.plotly_chart(fig, key=f'map_chart_{col}')
+            if col != 'Territory':  # Skip territory for bar chart
+                fig = px.bar(
+                    value_counts,
+                    title=f'Distribution of {col}',
+                    labels={'index': 'Value', 'value': 'Count'}
+                )
+                st.plotly_chart(fig, key=f'bar_chart_{col}')
+                
+            # Map visualization for territory-based columns
+            if col != 'Territory':
+                st.subheader(f"{col} by Country")
+                fig = px.choropleth(
+                    df,
+                    locations="Territory",
+                    locationmode="country names",
+                    color=col,
+                    title=f"{col} by Country",
+                    color_continuous_scale="Viridis"
+                )
+                st.plotly_chart(fig, key=f'map_chart_{col}')
+        
+            # # Create bar chart
+            # if col != 'Territory':  # Skip territory for bar chart
+            #     fig = px.bar(
+            #         value_counts,
+            #         title=f'Distribution of {col}',
+            #         labels={'index': 'Value', 'value': 'Count'}
+            #     )
+            #     st.plotly_chart(fig)
+                
+            # # Map visualization for territory-based columns
+            # if col != 'Territory':
+            #     st.write("Map visualization:")
+            #     # Create a map using plotly
+            #     fig = px.choropleth(
+            #         df,
+            #         locations="Territory",
+            #         locationmode="country names",
+            #         color=col,
+            #         title=f"{col} by Country",
+            #         color_continuous_scale="Viridis"
+            #     )
+            #     st.plotly_chart(fig)
 
