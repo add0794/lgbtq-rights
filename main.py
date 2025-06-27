@@ -59,15 +59,15 @@ with st.expander("Countries with Unknown Data"):
 
     # Add choropleth map of unknown data distribution
     st.subheader("Distribution of Unknown Data")
-    df['Unknown Rights'] = df.apply(lambda row: sum(row == 'Unknown'), axis=1)
+    df['Rights with Unknown Data'] = df.apply(lambda row: sum(row == 'Unknown'), axis=1)
     fig = px.choropleth(
         df,
         locations="Territory",
         locationmode="country names",
-        color="Unknown Rights",
+        color="Rights with Unknown Data",
         title="Most countries have known data for LGBTQ+ rights",  
         color_continuous_scale="Viridis",
-        hover_data=['Territory', 'Unknown Rights']
+        hover_data=['Territory', 'Rights with Unknown Data']
     )
     st.plotly_chart(fig, key='unknown_rights_map')
 
@@ -179,10 +179,6 @@ with st.expander("Column Analysis Tabs"):
 with st.expander("Same-sex Marriage and Democracy Analysis"):
     st.markdown("""
     Countries that allow same-sex marriage tend to have higher democracy scores on average, indicating a statistically significant correlation between LGBTQ+ rights and democratic governance.
-    
-    Data Analysis:
-    - Average democracy scores for countries with and without same-sex marriage
-    - Visualization of the relationship between marriage rights and democracy
     """)
 
     # Read democracy index data
@@ -250,11 +246,10 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
 
 # Correlation Analysis
 with st.expander("Correlation Analysis Between LGBTQ+ Rights"):
-    # st.markdown("""
-    # This heatmap shows the relationships between different LGBTQ+ rights across countries. 
-    # A positive correlation means that countries that have one right are more likely to have the other.
-    # A negative correlation means that countries that have one right are less likely to have the other.
-    # """)
+    st.markdown("""
+    This heatmap shows the relationships between different LGBTQ+ rights across countries. 
+    While many LGBTQ rights are highly correlated with each other, others, like recognition of same-sex unions and adoption by same-sex couples, are less correlated. This indicates that some rights are more important than others, likely because of their impact on LGBTQ+ people's lives.
+    """)
 
     # Select columns for correlation analysis (excluding non-binary columns)
     analysis_columns = ['Same-sex marriage', 'Recognition of same-sex unions', 
