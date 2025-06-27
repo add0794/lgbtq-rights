@@ -107,6 +107,7 @@ with st.expander("🌍 Country-Level Highlights: Where LGBTQ+ Rights Are Improvi
 
 # Create tabs for each column
 with st.expander("Column Analysis Tabs"):
+    columns = df.columns
     column_tabs = st.tabs([col for col in columns if col not in ['Territory', 'Same-sex sexual activity', 'Unknown Rights']])
     
     for tab, column in zip(column_tabs, [col for col in columns if col not in ['Territory', 'Same-sex sexual activity', 'Unknown Rights']]):
