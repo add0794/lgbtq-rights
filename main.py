@@ -95,6 +95,30 @@ for col in columns:
                 )
                 st.plotly_chart(fig, key=f'map_chart_{col}')
 
+# Add correlation analysis
+with st.expander("Correlation Analysis"):
+    st.subheader("Correlation between Democracy Index and Same-Sex Couples Rights")
+    
+    # Calculate correlation
+    correlation = df['Democracy Index'].corr(
+        df['Adoption by same-sex couples'].replace({'Yes': 1, 'No': 0, 'Unknown': 0, 'Partial': 0.5})
+    )
+    st.write(f"Correlation coefficient: {correlation:.3f}")
+    
+    # Create scatter plot
+    fig = px.scatter(
+        df,
+        x='Democracy Index',
+        y='Adoption by same-sex couples',
+        title='Relationship between Democracy Index and Same-Sex Couples Rights',
+        color='Territory',
+        labels={
+            'Democracy Index': 'Democracy Index Score',
+            'Adoption by same-sex couples': 'Same-Sex Couples Rights'
+        }
+    )
+    st.plotly_chart(fig)
+
 # Display countries with unknown data
 with st.expander("Countries with Unknown Data"):
     
