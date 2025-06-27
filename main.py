@@ -57,7 +57,7 @@ with st.expander("Countries with Unknown Data"):
         color_continuous_scale="Viridis",
         hover_data=['Territory', 'Unknown Rights']
     )
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, key='democracy_chart')
 
 # Analyze each column
 
@@ -207,7 +207,7 @@ except Exception as e:
             yshift=10
         )
     
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, key='democracy_chart')
     
     # Show statistics
     st.markdown(f"""
