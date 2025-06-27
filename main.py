@@ -78,7 +78,6 @@ for col in columns:
                 
             # Map visualization for territory-based columns
             if col != 'Territory':
-                st.subheader(f"{col} by Country")
                 fig = px.choropleth(
                     df,
                     locations="Territory",
@@ -88,27 +87,3 @@ for col in columns:
                     color_continuous_scale="Viridis"
                 )
                 st.plotly_chart(fig, key=f'map_chart_{col}')
-        
-            # # Create bar chart
-            # if col != 'Territory':  # Skip territory for bar chart
-            #     fig = px.bar(
-            #         value_counts,
-            #         title=f'Distribution of {col}',
-            #         labels={'index': 'Value', 'value': 'Count'}
-            #     )
-            #     st.plotly_chart(fig)
-                
-            # # Map visualization for territory-based columns
-            # if col != 'Territory':
-            #     st.write("Map visualization:")
-            #     # Create a map using plotly
-            #     fig = px.choropleth(
-            #         df,
-            #         locations="Territory",
-            #         locationmode="country names",
-            #         color=col,
-            #         title=f"{col} by Country",
-            #         color_continuous_scale="Viridis"
-            #     )
-            #     st.plotly_chart(fig)
-
