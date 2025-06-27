@@ -67,7 +67,7 @@ st.markdown("---")
 st.markdown("These examples highlight the global divergence in LGBTQ+ rights: while some countries are making historic strides toward equality, others are enacting laws that undermine decades of progress.")
 
 # Analyze each column
-with st.header("Dataset Overview"):
+st.header("Dataset Overview"):
 st.write("Number of countries:", len(df['Territory'].unique()))
 st.write("Countries (Descending Order):")
 st.write(df['Territory'].sort_values(ascending=True).unique())
