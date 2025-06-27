@@ -2,8 +2,15 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 
-# Read the dataset directly from the CSV file
+# Read the datasets
 df = pd.read_csv('lgbtq_rights_by_country.csv')
+democracy_df = pd.read_csv('democracy_index.csv')
+
+# Join the datasets on country name
+merged_df = pd.merge(df, democracy_df, left_on='Territory', right_on='Country', how='inner')
+
+# Update the main DataFrame to use the merged data
+df = merged_df
 
 # Set page configuration
 st.set_page_config(page_title="LGBTQ Rights in Pride Month 2025", layout="wide")

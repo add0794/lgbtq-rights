@@ -51,7 +51,11 @@ def get_democracy_index_data(url):
     
     return df
 
-# Create DataFrame
+# Create DataFrame and save to CSV
 if __name__ == "__main__":
-    df = get_democracy_index_data("https://worldpopulationreview.com/country-rankings/democracy-index-by-country")
+    url = "https://worldpopulationreview.com/country-rankings/democracy-index-by-country"
+    df = get_democracy_index_data(url)
+    df.to_csv('democracy_index.csv', index=False)
+    print("Democracy index data saved to democracy_index.csv")
+    print("\nFirst few rows:")
     print(df.head())
