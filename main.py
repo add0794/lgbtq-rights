@@ -257,7 +257,7 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
 with st.expander("Correlation Analysis Between LGBTQ+ Rights"):
     st.markdown("""
     This heatmap shows the relationships between different LGBTQ+ rights across countries. 
-    While many LGBTQ rights are highly correlated with each other, others, like recognition of same-sex unions and adoption by same-sex couples, are less correlated. This indicates that some rights are more important than others, likely because of their impact on LGBTQ+ people's lives.
+    While many LGBTQ rights are highly correlated with each other, others, like recognition of same-sex unions and anti-discrimination laws concerning sexual orientation, are less correlated. This indicates that some rights are more important than others, likely because of their impact on LGBTQ+ people's lives.
     """)
 
     # Select columns for correlation analysis (excluding non-binary columns)
