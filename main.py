@@ -53,7 +53,6 @@ for col in columns:
                 st.write("Indicates whether a country has national laws protecting against discrimination based on gender identity. These laws are crucial for safeguarding the rights of transgender and gender nonconforming individuals in areas such as employment, healthcare, education, and housing.")
             
             # Basic statistics and analysis
-            st.write("\nAnalysis:")
             st.write("Unique values:", df[col].nunique())
             st.write("Value counts with percentages:")
             value_counts = df[col].value_counts()
@@ -61,8 +60,8 @@ for col in columns:
             
             # Create a DataFrame to display with percentages
             display_df = pd.DataFrame({
-                'Count': value_counts.values,
                 'Value': value_counts.index,
+                'Count': value_counts.values,
                 'Percentage': [f"{(x/total*100):.1f}%" for x in value_counts.values]
             })
             st.dataframe(display_df)
