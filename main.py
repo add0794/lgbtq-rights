@@ -60,10 +60,11 @@ for col in columns:
             
             # Create a DataFrame to display with percentages
             display_df = pd.DataFrame({
-                'Count': value_counts.values,
+                'Count': value_counts.values.astype(str),
                 'Value': value_counts.index,
                 'Percentage': [f"{(x/total*100):.1f}%" for x in value_counts.values]
             })
+            display_df['Count'] = display_df['Count'].str.ljust(3)  # Left-justify count values
             st.table(display_df)
             
             # Create bar chart
