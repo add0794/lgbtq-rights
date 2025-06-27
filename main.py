@@ -208,29 +208,29 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
             yshift=10
         )
 
-st.plotly_chart(fig, key='democracy_bar_chart_1')
-    
-# Run t-test
-    
-# Get democracy scores for countries with and without marriage
-scores_with_marriage = merged_df[merged_df['Same-sex marriage'] == 'Yes']['Democracy Index'].dropna()
-scores_without_marriage = merged_df[merged_df['Same-sex marriage'] == 'No']['Democracy Index'].dropna()
+    st.plotly_chart(fig, key='democracy_bar_chart_1')
+        
+    # Run t-test
+        
+    # Get democracy scores for countries with and without marriage
+    scores_with_marriage = merged_df[merged_df['Same-sex marriage'] == 'Yes']['Democracy Index'].dropna()
+    scores_without_marriage = merged_df[merged_df['Same-sex marriage'] == 'No']['Democracy Index'].dropna()
 
-# Show statistics
-st.markdown(f"""
-### Statistics:
-- Average democracy score for countries with same-sex marriage: {marriage_allowed:.2f}
-- Average democracy score for countries without same-sex marriage: {marriage_not_allowed:.2f}
-- Difference: {marriage_allowed - marriage_not_allowed:.2f} points
-""")
+    # Show statistics
+    st.markdown(f"""
+    ### Statistics:
+    - Average democracy score for countries with same-sex marriage: {marriage_allowed:.2f}
+    - Average democracy score for countries without same-sex marriage: {marriage_not_allowed:.2f}
+    - Difference: {marriage_allowed - marriage_not_allowed:.2f} points
+    """)
 
-# Run two-sample t-test
-t_stat, p_value = ttest_ind(scores_with_marriage, scores_without_marriage, equal_var=False)
+    # Run two-sample t-test
+    t_stat, p_value = ttest_ind(scores_with_marriage, scores_without_marriage, equal_var=False)
 
-# Show t-test results
-st.markdown(f"""
-### Statistical Significance:
-- T-statistic: {t_stat:.2f}
-- P-value: {p_value:.4f}
-- Result: The difference in democracy scores is {"statistically significant" if p_value < 0.05 else "not statistically significant"} (α=0.05)
-""")
+    # Show t-test results
+    st.markdown(f"""
+    ### Statistical Significance:
+    - T-statistic: {t_stat:.2f}
+    - P-value: {p_value:.4f}
+    - Result: The difference in democracy scores is {"statistically significant" if p_value < 0.05 else "not statistically significant"} (α=0.05)
+    """)
