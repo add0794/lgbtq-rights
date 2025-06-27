@@ -121,7 +121,7 @@ with st.expander("🌍 Country-Level Highlights"):
         st.markdown("These examples highlight the global divergence in LGBTQ+ rights: while some countries are making historic strides toward equality, others are enacting laws that undermine decades of progress.")
 
 # Create tabs for each column
-with st.expander("Column Analysis Tabs"):
+with st.expander("LGBTQ+ Rights Exploratory Analysis"):
     columns = df.columns
     column_tabs = st.tabs([col for col in columns if col not in ['Territory', 'Same-sex sexual activity', 'Unknown Rights']])
     
