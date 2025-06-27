@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import plotly.express as px
 
 # Read the dataset directly from the CSV file
 df = pd.read_csv('lgbtq_rights_by_country.csv')
