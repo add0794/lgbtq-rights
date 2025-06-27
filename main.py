@@ -263,9 +263,6 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
         # Create heatmap
         fig = px.imshow(
             corr_matrix,
-            labels=dict(x="Right", y="Right", color="Correlation"),
-            x=analysis_columns,
-            y=analysis_columns,
             color_continuous_scale='RdBu',
             range_color=[-1, 1]
         )
