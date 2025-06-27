@@ -101,3 +101,17 @@ with st.expander("Countries with Unknown Data"):
         unknown_rights = unknown_data[unknown_data['Territory'] == country]
         unknown_columns = unknown_rights.columns[unknown_rights.isin(['Unknown']).any()]
         st.write("Unknown rights:", unknown_columns.tolist())
+
+    # Add choropleth map of unknown data distribution
+    st.subheader("Distribution of Unknown Data")
+    df['Unknown Rights'] = df.apply(lambda row: sum(row == 'Unknown'), axis=1)
+    fig = px.choropleth(
+        df,
+        locations="Territory",
+        locationmode="country names",
+        color="Unknown Rights",
+        title="Number of Unknown Rights by Country",
+        color_continuous_scale="Viridis",
+        hover_data=['Territory', 'Unknown Rights']
+    )
+    st.plotly_chart(fig)
