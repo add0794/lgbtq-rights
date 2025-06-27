@@ -201,7 +201,7 @@ try:
             yshift=10
         )
     
-    st.plotly_chart(fig, key='democracy_chart')
+    st.plotly_chart(fig, key='democracy')
     
     # Show statistics
     st.markdown(f"""
@@ -210,10 +210,3 @@ try:
 - Average democracy score for countries without same-sex marriage: {marriage_not_allowed:.2f}
 - Difference: {marriage_allowed - marriage_not_allowed:.2f} points
     """)
-
-except FileNotFoundError:
-    st.error("Democracy index CSV file not found. Please make sure 'democracy_index.csv' is in the same directory.")
-except pd.errors.EmptyDataError:
-    st.error("The democracy index CSV file is empty.")
-except Exception as e:
-    st.error(f"An error occurred while processing the democracy index data: {str(e)}")
