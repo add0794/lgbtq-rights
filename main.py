@@ -30,7 +30,7 @@ columns = df.columns
 # Create tabs for each analysis
 
 # Add country-level highlights
-with st.expander("🌍 Country-Level Highlights: Where LGBTQ+ Rights Are Improving or Regressing"):
+with st.header("🌍 Country-Level Highlights: Where LGBTQ+ Rights Are Improving or Regressing"):
     st.subheader("✅ Countries Where LGBTQ+ Rights Have Improved")
 
     st.markdown("""
