@@ -63,8 +63,12 @@ with st.expander("Countries with Unknown Data"):
 # Analyze each column
 
 # Country-Level Highlights
-with st.expander("🌍 Country-Level Highlights: Where LGBTQ+ Rights Are Improving or Regressing"):
-    with st.expander("✅ Countries Where LGBTQ+ Rights Have Improved"):
+with st.expander("🌍 Country-Level Highlights"):
+    # Create tabs for different categories
+    tab_titles = ["✅ Countries Where LGBTQ+ Rights Have Improved", "❌ Countries Where LGBTQ+ Rights Have Regressed", "Conclusion"]
+    tabs = st.tabs(tab_titles)
+
+    with tabs[0]:
         st.markdown("""
         **1. Estonia**  
         • In June 2023, Estonia became the **first former Soviet country** to legalize same-sex marriage and joint adoption, effective **January 1, 2024**.  
@@ -82,7 +86,7 @@ with st.expander("🌍 Country-Level Highlights: Where LGBTQ+ Rights Are Improvi
         🔗 [The Times](https://www.thetimes.co.uk/article/hundreds-same-sex-couples-marry-thailand-changes-law-6hqhqwbv3)
         """)
 
-    with st.expander("❌ Countries Where LGBTQ+ Rights Have Regressed"):
+    with tabs[1]:
         st.markdown("""
         **1. Hungary**  
         • In **2025**, Hungary banned the **Budapest Pride march** and passed new laws restricting LGBTQ+ content for minors, blocking gender marker changes, and limiting adoption by same-sex couples.  
@@ -102,7 +106,7 @@ with st.expander("🌍 Country-Level Highlights: Where LGBTQ+ Rights Are Improvi
         🔗 [WSJ – Trans Rights Rollback](https://www.wsj.com/politics/policy/transgender-rights-movement-challenges-b8de6e62)
         """)
 
-    with st.expander("Conclusion"):
+    with tabs[2]:
         st.markdown("These examples highlight the global divergence in LGBTQ+ rights: while some countries are making historic strides toward equality, others are enacting laws that undermine decades of progress.")
 
 # Create tabs for each column
