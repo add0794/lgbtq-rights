@@ -156,6 +156,18 @@ for column in columns:
         labels={'index': 'Value', 'value': 'Count'}
     )
     st.plotly_chart(fig, key=f'bar_chart_{column}')
+    
+    # Create choropleth map
+    fig = px.choropleth(
+        df,
+        locations="Territory",
+        locationmode="country names",
+        color=column,
+        title=f"{column} by Country",
+        color_continuous_scale="Viridis",
+        hover_data=['Territory']
+    )
+    st.plotly_chart(fig, key=f'map_{column}')
 
 with st.expander("Insights"):
     st.markdown("""
