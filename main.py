@@ -149,6 +149,18 @@ for column in columns:
     display_df['Count'] = display_df['Count'].str.ljust(3)  # Left-justify count values
     st.table(display_df)
     
+    # Create map visualization
+    fig = px.choropleth(
+        df,
+        locations="Territory",
+        locationmode="country names",
+        color=column,
+        title=f"Global Distribution of {column}",
+        color_continuous_scale="Viridis",
+        hover_data=['Territory', column]
+    )
+    st.plotly_chart(fig, key=f'map_{column}')
+    
     # Create bar chart
     fig = px.bar(
         value_counts,
@@ -157,8 +169,7 @@ for column in columns:
     )
     st.plotly_chart(fig, key=f'bar_chart_{column}')
 
-with st.expander("Insights"):
-    st.markdown("""
+st.markdown("""
 ### Insight: Same-sex Marriage and Democracy
 
 Countries that allow same-sex marriage tend to have higher democracy scores on average, indicating a correlation between LGBTQ+ rights and democratic governance.
