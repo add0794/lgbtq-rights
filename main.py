@@ -241,11 +241,11 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
 
     # Correlation Analysis
     with st.expander("Correlation Analysis Between LGBTQ+ Rights"):
-        st.markdown("""
-        This heatmap shows the relationships between different LGBTQ+ rights across countries. 
-        A positive correlation means that countries that have one right are more likely to have the other.
-        A negative correlation means that countries that have one right are less likely to have the other.
-        """)
+        # st.markdown("""
+        # This heatmap shows the relationships between different LGBTQ+ rights across countries. 
+        # A positive correlation means that countries that have one right are more likely to have the other.
+        # A negative correlation means that countries that have one right are less likely to have the other.
+        # """)
 
         # Select columns for correlation analysis (excluding non-binary columns)
         analysis_columns = ['Same-sex marriage', 'Recognition of same-sex unions', 
@@ -264,7 +264,7 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
         fig = px.imshow(
             corr_matrix,
             color_continuous_scale='RdBu',
-            range_color=[-1, 1]
+            range_color=[0, 1]
         )
         
         st.plotly_chart(fig, key='correlation_heatmap')
