@@ -24,7 +24,7 @@ As Pride comes to a close, I’ve analyzed global LGBTQ+ rights, tracking legal 
 
 Feel free to give feedback!
 
-Data can be found [here](https://www.kaggle.com/datasets/wilomentena/lgbt-rights-worldwide/data).
+Data can be found on [Kaggle](https://www.kaggle.com/datasets/wilomentena/lgbt-rights-worldwide/data) and [World Population Review](https://worldpopulationreview.com/country-rankings/democracy-index-by-country).
 """)
 
 # Analyze each column
