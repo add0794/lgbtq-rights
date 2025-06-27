@@ -92,10 +92,6 @@ for col in columns:
 with st.expander("Countries with Unknown Data"):
     st.write("The following countries have unknown data for some rights:")
     
-    # Display number of countries with unknown data
-    num_countries_with_unknown = len(unknown_data_dict)
-    st.write(f"Number of countries with unknown data: {num_countries_with_unknown}")
-
     # Create dictionary to store unknown data
     unknown_data_dict = {}
     
@@ -106,6 +102,10 @@ with st.expander("Countries with Unknown Data"):
         if unknown_rights:
             unknown_data_dict[country] = unknown_rights
     
+    # Display number of countries with unknown data
+    num_countries_with_unknown = len(unknown_data_dict)
+    st.write(f"Number of countries with unknown data: {num_countries_with_unknown}")
+
     # Display unknown data dictionary
     st.write(unknown_data_dict)
 
