@@ -165,48 +165,47 @@ Countries that allow same-sex marriage tend to have higher democracy scores on a
 """)
 
 # Read democracy index data
-try:
-    democracy_df = pd.read_csv('democracy_index.csv')
-    
-    # Merge datasets on country name
-    merged_df = pd.merge(df, democracy_df, left_on='Territory', right_on='Country', how='inner')
-    
-    # Calculate average democracy scores for countries with and without same-sex marriage
-    marriage_allowed = merged_df[merged_df['Same-sex marriage'] == 'Yes']['Democracy Index'].mean()
-    marriage_not_allowed = merged_df[merged_df['Same-sex marriage'] == 'No']['Democracy Index'].mean()
-    
-    # Create DataFrame for visualization
-    avg_scores = pd.DataFrame({
-        'Group': ['Same-sex marriage allowed', 'Same-sex marriage not allowed'],
-        'Average Democracy Score': [marriage_allowed, marriage_not_allowed]
-    })
-    
-    # Create bar chart
-    fig = px.bar(
-        avg_scores,
-        x='Group',
-        y='Average Democracy Score',
-        title='Average Democracy Scores by Same-sex Marriage Status',
-        color='Group',
-        color_discrete_sequence=['#636EFA', '#EF553B']
+democracy_df = pd.read_csv('democracy_index.csv')
+
+# Merge datasets on country name
+merged_df = pd.merge(df, democracy_df, left_on='Territory', right_on='Country', how='inner')
+
+# Calculate average democracy scores for countries with and without same-sex marriage
+marriage_allowed = merged_df[merged_df['Same-sex marriage'] == 'Yes']['Democracy Index'].mean()
+marriage_not_allowed = merged_df[merged_df['Same-sex marriage'] == 'No']['Democracy Index'].mean()
+
+# Create DataFrame for visualization
+avg_scores = pd.DataFrame({
+    'Group': ['Same-sex marriage allowed', 'Same-sex marriage not allowed'],
+    'Average Democracy Score': [marriage_allowed, marriage_not_allowed]
+})
+
+# Create bar chart
+fig = px.bar(
+    avg_scores,
+    x='Group',
+    y='Average Democracy Score',
+    title='Average Democracy Scores by Same-sex Marriage Status',
+    color='Group',
+    color_discrete_sequence=['#636EFA', '#EF553B']
+)
+
+# Add text labels
+for i, row in avg_scores.iterrows():
+    fig.add_annotation(
+        x=row['Group'],
+        y=row['Average Democracy Score'],
+        text=f"{row['Average Democracy Score']:.2f}",
+        showarrow=False,
+        yshift=10
     )
-    
-    # Add text labels
-    for i, row in avg_scores.iterrows():
-        fig.add_annotation(
-            x=row['Group'],
-            y=row['Average Democracy Score'],
-            text=f"{row['Average Democracy Score']:.2f}",
-            showarrow=False,
-            yshift=10
-        )
-    
-    st.plotly_chart(fig, key='democracy')
-    
-    # Show statistics
-    st.markdown(f"""
+
+st.plotly_chart(fig, key='democracy')
+
+# Show statistics
+st.markdown(f"""
 ### Statistics:
 - Average democracy score for countries with same-sex marriage: {marriage_allowed:.2f}
 - Average democracy score for countries without same-sex marriage: {marriage_not_allowed:.2f}
 - Difference: {marriage_allowed - marriage_not_allowed:.2f} points
-    """)
+""")
