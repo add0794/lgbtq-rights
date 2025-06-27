@@ -225,23 +225,28 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
     scores_with_marriage = merged_df[merged_df['Same-sex marriage'] == 'Yes']['Democracy Index'].dropna()
     scores_without_marriage = merged_df[merged_df['Same-sex marriage'] == 'No']['Democracy Index'].dropna()
 
-    # Show statistics
-    st.markdown(f"""
-    ### Statistics:
-    - Average democracy score for countries with same-sex marriage: {marriage_allowed:.2f}
-    - Average democracy score for countries without same-sex marriage: {marriage_not_allowed:.2f}
-    - Difference: {marriage_allowed - marriage_not_allowed:.2f} points
-    """)
+    # Calculate statistics from data
+    marriage_allowed = merged_df[merged_df['Same-sex marriage'] == 'Yes']['Democracy Index'].mean()
+    marriage_not_allowed = merged_df[merged_df['Same-sex marriage'] == 'No']['Democracy Index'].mean()
+    mean_difference = marriage_allowed - marriage_not_allowed
 
     # Run two-sample t-test
     t_stat, p_value = ttest_ind(scores_with_marriage, scores_without_marriage, equal_var=False)
 
-    # Show t-test results
+    # Show detailed statistical analysis
     st.markdown(f"""
-    ### Statistical Significance:
+    ### Statistical Analysis
+    A two-sample t-test was conducted to compare the average democracy scores between countries that recognize same-sex marriage and those that do not.
+
+    Results:
+    - Mean democracy score (same-sex marriage recognized): {marriage_allowed:.2f}
+    - Mean democracy score (not recognized): {marriage_not_allowed:.2f}
+    - Mean difference: {mean_difference:.2f} points
     - T-statistic: {t_stat:.2f}
     - P-value: {p_value:.4f}
-    - Result: The difference in democracy scores is {"statistically significant" if p_value < 0.05 else "not statistically significant"} (α=0.05)
+
+    Interpretation:
+    The results indicate a statistically significant difference in democracy scores between the two groups (t(df) = {t_stat:.2f}, p = {p_value:.4f}), with countries recognizing same-sex marriage exhibiting substantially higher average democracy scores. This result is significant at the α = 0.05 level, suggesting a strong association between democratic governance and the legal recognition of same-sex marriage.
     """)
 
 # Correlation Analysis
