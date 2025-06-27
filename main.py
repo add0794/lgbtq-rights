@@ -71,7 +71,7 @@ for col in columns:
             if col != 'Territory':  # Skip territory for bar chart
                 fig = px.bar(
                     value_counts,
-                    title=f'Distribution of {col}',
+                    title=f'Count of {col}',
                     labels={'index': 'Value', 'value': 'Count'}
                 )
                 st.plotly_chart(fig, key=f'bar_chart_{col}')
