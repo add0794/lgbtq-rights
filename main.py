@@ -118,7 +118,7 @@ for col in columns:
     # Create bar chart
     fig = px.bar(
         value_counts,
-        title=f'Count of {col}',
+        title=f'Count',
         labels={'index': 'Value', 'value': 'Count'}
     )
     st.plotly_chart(fig, key=f'bar_chart_{col}')
@@ -129,7 +129,7 @@ for col in columns:
         locations="Territory",
         locationmode="country names",
         color=col,
-        title=f"{col} by Country",
+        title="Map visualization",
         color_continuous_scale="Viridis"
     )
     st.plotly_chart(fig, key=f'map_chart_{col}')
