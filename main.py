@@ -265,8 +265,7 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
             corr_matrix,
             color_continuous_scale='RdBu',
             range_color=[0, 1],
-            color_continuous_midpoint=0.5,  # Center the color scale at 0.5
-            hover_data={'x': False, 'y': False}  # Remove default hover data
+            color_continuous_midpoint=0.5  # Center the color scale at 0.5
         )
         
         # Update layout for better interactivity
