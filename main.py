@@ -30,6 +30,38 @@ with st.expander("Dataset Overview"):
 # Analyze each column
 columns = df.columns
 
+# Create tabs for each analysis
+
+# Add insights
+with st.expander("Insights"):
+    st.subheader("Insights about Same-Sex Marriage and Democracy")
+    
+    # Calculate average democracy scores
+    marriage_countries = df[df['Same-sex marriage'] == 'Yes']
+    no_marriage_countries = df[df['Same-sex marriage'] == 'No']
+    
+    avg_marriage_score = marriage_countries['Democracy Index'].mean()
+    avg_no_marriage_score = no_marriage_countries['Democracy Index'].mean()
+    
+    st.write(f"Average democracy score for countries with same-sex marriage: {avg_marriage_score:.2f}")
+    st.write(f"Average democracy score for countries without same-sex marriage: {avg_no_marriage_score:.2f}")
+    
+    # Create bar chart
+    insight_data = pd.DataFrame({
+        'Group': ['With Same-Sex Marriage', 'Without Same-Sex Marriage'],
+        'Average Democracy Score': [avg_marriage_score, avg_no_marriage_score]
+    })
+    
+    fig = px.bar(
+        insight_data,
+        x='Group',
+        y='Average Democracy Score',
+        title='Average Democracy Scores by Same-Sex Marriage Status',
+        color='Group',
+        labels={'Group': 'Country Group', 'Average Democracy Score': 'Democracy Score'}
+    )
+    st.plotly_chart(fig)
+
 # Create visualizations
 
 for col in columns:
