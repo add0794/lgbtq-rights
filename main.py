@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
+from scipy.stats import ttest_ind
 
 # Read datasets
 df = pd.read_csv('lgbtq_rights_by_country.csv')
@@ -214,7 +215,6 @@ for i, row in avg_scores.iterrows():
 st.plotly_chart(fig, key='democracy')
     
 # Run t-test
-from scipy.stats import ttest_ind
     
 # Get democracy scores for countries with and without marriage
 scores_with_marriage = merged_df[merged_df['Same-sex marriage'] == 'Yes']['Democracy Index'].dropna()
