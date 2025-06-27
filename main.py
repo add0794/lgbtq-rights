@@ -41,7 +41,7 @@ for col in columns:
             # Column descriptions and analysis
             if col == "Recognition of same-sex unions":
                 st.write("Indicates whether a country legally recognizes same-sex unions, such as civil partnerships or domestic partnerships. This is distinct from marriage, but still grants some or many of the legal benefits associated with marriage, such as inheritance rights, hospital visitation, and tax benefits.")
-            if col == "Same-sex marriages":
+            if col == "Same-sex marriage":
                 st.write("Indicates whether same-sex marriage is legally recognized, granting full marital rights equal to those of heterosexual couples. This includes not only civil benefits but also symbolic recognition of equality under the law. As of now, fewer than 40 countries allow full same-sex marriage.")
             if col == "Adoption by same-sex couples":
                 st.write("Indicates whether same-sex couples are legally allowed to adopt children. This includes joint adoption as well as second-parent or stepchild adoption. Legal barriers in many countries still prevent same-sex couples from building families with full parental rights.")
