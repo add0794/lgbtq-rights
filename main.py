@@ -270,11 +270,4 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
             range_color=[-1, 1]
         )
         
-        # Update layout
-        fig.update_layout(
-            title='Correlation Between Different LGBTQ+ Rights',
-            xaxis_title='Right',
-            yaxis_title='Right'
-        )
-        
         st.plotly_chart(fig, key='correlation_heatmap')
