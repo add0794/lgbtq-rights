@@ -59,17 +59,6 @@ with st.expander("Countries with Unknown Data"):
     )
     st.plotly_chart(fig)
 
-    # Map visualization for territory-based columns
-    fig = px.choropleth(
-        df,
-        locations="Territory",
-        locationmode="country names",
-        color=col,
-        title="Map visualization",
-        color_continuous_scale="Viridis"
-    )
-    st.plotly_chart(fig, key=f'map_chart_{col}')
-
 # Analyze each column
 
 # Country-Level Highlights
@@ -220,6 +209,17 @@ for column in df.columns:
         labels={'index': 'Value', 'value': 'Count'}
     )
     st.plotly_chart(fig, key=f'bar_chart_{column}')
+    
+    # Map visualization for territory-based columns
+    fig = px.choropleth(
+        df,
+        locations="Territory",
+        locationmode="country names",
+        color=column,
+        title=f"{column} by Country",
+        color_continuous_scale="Viridis"
+    )
+    st.plotly_chart(fig, key=f'map_chart_{column}')
 
 # Read democracy index data
 try:
