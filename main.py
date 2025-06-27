@@ -2,8 +2,15 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 
-# Read the dataset directly from the CSV file
+# Read datasets
 df = pd.read_csv('lgbtq_rights_by_country.csv')
+democracy_df = pd.read_csv('democracy_index.csv')
+
+# Join datasets on country name
+df = pd.merge(df, democracy_df, left_on='Territory', right_on='Country', how='inner')
+
+# Drop the duplicate Country column after merge
+df.drop('Country', axis=1, inplace=True)
 
 # Set page configuration
 st.set_page_config(page_title="LGBTQ Rights in Pride Month 2025", layout="wide")
@@ -40,8 +47,17 @@ with st.expander("Insights"):
     marriage_countries = df[df['Same-sex marriage'] == 'Yes']
     no_marriage_countries = df[df['Same-sex marriage'] == 'No']
     
+    # Convert democracy index values to numeric
+    marriage_countries['Democracy Index'] = pd.to_numeric(marriage_countries['Democracy Index'], errors='coerce')
+    no_marriage_countries['Democracy Index'] = pd.to_numeric(no_marriage_countries['Democracy Index'], errors='coerce')
+    
+    # Calculate means
     avg_marriage_score = marriage_countries['Democracy Index'].mean()
     avg_no_marriage_score = no_marriage_countries['Democracy Index'].mean()
+    
+    # Handle NaN values
+    avg_marriage_score = avg_marriage_score if pd.notna(avg_marriage_score) else 0
+    avg_no_marriage_score = avg_no_marriage_score if pd.notna(avg_no_marriage_score) else 0
     
     st.write(f"Average democracy score for countries with same-sex marriage: {avg_marriage_score:.2f}")
     st.write(f"Average democracy score for countries without same-sex marriage: {avg_no_marriage_score:.2f}")
