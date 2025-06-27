@@ -9,11 +9,11 @@ df = pd.read_csv('lgbtq_rights_by_country.csv')
 st.set_page_config(page_title="LGBTQ Rights in Pride Month 2025", layout="wide")
 
 # Add title and description
-st.title("Analyzing LGBTQ Rights in Pride Month 2025")
+st.title("LGBTQ Rights in 2025")
 st.write("""
 Pride Month is a time to honor the resilience, visibility, and progress of queer communities around the world. Over the past few decades, LGBTQ+ people have achieved significant legal and cultural milestones, especially in many Western countries, where same-sex marriage, civil unions, and adoption rights are now widely recognized. However, this progress is far from universal. In much of the Global South and in many non-Western countries, same-sex relationships remain criminalized, legal protections are minimal or nonexistent, and queer individuals often face widespread social stigma, violence, and state repression. These disparities create hostile conditions for both travel and daily life for queer people globally.
 
-As Pride comes to a close, I’ve analyzed global LGBTQ+ rights, tracking legal recognition, civil protections, and societal acceptance across regions. It highlights where progress has been made and where urgent action is still needed, emphasizing that Pride is not only a celebration, but also a call to action for global equity and human rights.
+As Pride 2025 comes to a close, I’ve analyzed global LGBTQ+ rights, tracking legal recognition, civil protections, and societal acceptance across regions. It highlights where progress has been made and where urgent action is still needed, emphasizing that Pride is not only a celebration, but also a call to action for global equity and human rights.
 
 Feel free to give feedback!
 
@@ -42,7 +42,7 @@ for col in columns:
             if col == "Recognition of same-sex unions":
                 st.write("Indicates whether a country legally recognizes same-sex unions, such as civil partnerships or domestic partnerships. This is distinct from marriage, but still grants some or many of the legal benefits associated with marriage, such as inheritance rights, hospital visitation, and tax benefits.")
             if col == "Same-sex marriage":
-                st.write("Indicates whether same-sex marriage is legally recognized, granting full marital rights equal to those of heterosexual couples. This includes not only civil benefits but also symbolic recognition of equality under the law. As of now, fewer than 40 countries allow full same-sex marriage.")
+                st.write("Indicates whether same-sex marriage is legally recognized, granting full marital rights equal to those of heterosexual couples. This includes not only civil benefits but also symbolic recognition of equality under the law. As of now, less than one-third of countries allow full same-sex marriage.")
             if col == "Adoption by same-sex couples":
                 st.write("Indicates whether same-sex couples are legally allowed to adopt children. This includes joint adoption as well as second-parent or stepchild adoption. Legal barriers in many countries still prevent same-sex couples from building families with full parental rights.")
             if col == "LGBT people allowed to serve openly in military?":
@@ -90,25 +90,23 @@ for col in columns:
                     st.plotly_chart(fig, key=f'map_chart_{col}')
         
             # Create bar chart
-            if col != 'Territory':  # Skip territory for bar chart
-                fig = px.bar(
-                    value_counts,
-                    title=f'Distribution of {col}',
-                    labels={'index': 'Value', 'value': 'Count'}
-                )
-                st.plotly_chart(fig)
-                
-            # Map visualization for territory-based columns
-            if col != 'Territory':
-                st.write("Map visualization:")
-                # Create a map using plotly
-                fig = px.choropleth(
-                    df,
-                    locations="Territory",
-                    locationmode="country names",
-                    color=col,
-                    title=f"{col} by Country",
-                    color_continuous_scale="Viridis"
-                )
-                st.plotly_chart(fig)
+            fig = px.bar(
+                value_counts,
+                title=f'Distribution of {col}',
+                labels={'index': 'Value', 'value': 'Count'}
+            )
+            st.plotly_chart(fig, key=f'bar_chart_{col}')
+            
+            # Map visualization
+            st.write("Map visualization:")
+            # Create a map using plotly
+            fig = px.choropleth(
+                df,
+                locations="Territory",
+                locationmode="country names",
+                color=col,
+                title=f"{col} by Country",
+                color_continuous_scale="Viridis"
+            )
+            st.plotly_chart(fig, key=f'map_chart_{col}')
 
