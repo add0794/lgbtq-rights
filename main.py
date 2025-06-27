@@ -238,3 +238,43 @@ with st.expander("Same-sex Marriage and Democracy Analysis"):
     - P-value: {p_value:.4f}
     - Result: The difference in democracy scores is {"statistically significant" if p_value < 0.05 else "not statistically significant"} (α=0.05)
     """)
+
+    # Correlation Analysis
+    with st.expander("Correlation Analysis Between LGBTQ+ Rights"):
+        st.markdown("""
+        This heatmap shows the relationships between different LGBTQ+ rights across countries. 
+        A positive correlation means that countries that have one right are more likely to have the other.
+        A negative correlation means that countries that have one right are less likely to have the other.
+        """)
+
+        # Select columns for correlation analysis (excluding non-binary columns)
+        analysis_columns = ['Same-sex marriage', 'Recognition of same-sex unions', 
+                          'Adoption by same-sex couples', 
+                          'LGBT people allowed to serve openly in military?',
+                          'Anti-discrimination laws concerning sexual orientation',
+                          'Anti-discrimination laws concerning gender identity']
+        
+        # Convert Yes/No to binary values
+        binary_df = df[analysis_columns].replace({'Yes': 1, 'No': 0, 'Unknown': None})
+        
+        # Calculate correlation matrix
+        corr_matrix = binary_df.corr()
+        
+        # Create heatmap
+        fig = px.imshow(
+            corr_matrix,
+            labels=dict(x="Right", y="Right", color="Correlation"),
+            x=analysis_columns,
+            y=analysis_columns,
+            color_continuous_scale='RdBu',
+            range_color=[-1, 1]
+        )
+        
+        # Update layout
+        fig.update_layout(
+            title='Correlation Between Different LGBTQ+ Rights',
+            xaxis_title='Right',
+            yaxis_title='Right'
+        )
+        
+        st.plotly_chart(fig, key='correlation_heatmap')
