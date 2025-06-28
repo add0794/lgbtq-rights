@@ -124,52 +124,54 @@ with st.expander("🌍 Country-Level Highlights"):
     with tabs[2]:
         st.markdown("These examples highlight the global divergence in LGBTQ+ rights: while some countries are making historic strides toward equality, others are enacting laws that undermine decades of progress.")
 
-# Create tabs for each column
 with st.expander("LGBTQ+ Rights Exploratory Analysis"):
-    columns = df.columns
-    column_tabs = st.tabs([col for col in columns if col not in ['Territory', 'Same-sex sexual activity', 'Unknown Rights']])
-    
-    for tab, column in zip(column_tabs, [col for col in columns if col not in ['Territory', 'Same-sex sexual activity', 'Unknown Rights']]):
+    # Define which columns to exclude
+    excluded_columns = ['Territory', 'Same-sex sexual activity', 'Unknown Rights']
+    display_columns = [col for col in df.columns if col not in excluded_columns]
+
+    # Column descriptions
+    column_descriptions = {
+        "Recognition of same-sex unions": "Indicates whether a country legally recognizes same-sex unions...",
+        "Same-sex marriage": "Indicates whether same-sex marriage is legally recognized...",
+        "Adoption by same-sex couples": "Indicates whether same-sex couples are legally allowed to adopt children...",
+        "LGBT people allowed to serve openly in military?": "Indicates whether LGBTQ+ individuals are permitted to serve openly...",
+        "Anti-discrimination laws concerning sexual orientation": "Indicates whether a country has national laws that protect individuals from discrimination based on sexual orientation...",
+        "Anti-discrimination laws concerning gender identity": "Indicates whether a country has national laws protecting against discrimination based on gender identity...",
+    }
+
+    # Create tabs for each relevant column
+    tabs = st.tabs(display_columns)
+
+    for tab, column in zip(tabs, display_columns):
         with tab:
             st.subheader(column)
-            
-            # Column descriptions and analysis
-            if column == "Recognition of same-sex unions":
-                st.write("Indicates whether a country legally recognizes same-sex unions, such as civil partnerships or domestic partnerships. This is distinct from marriage, but still grants some or many of the legal benefits associated with marriage, such as inheritance rights, hospital visitation, and tax benefits.")
-            if column == "Same-sex marriage":
-                st.write("Indicates whether same-sex marriage is legally recognized, granting full marital rights equal to those of heterosexual couples. This includes not only civil benefits but also symbolic recognition of equality under the law. As of now, less than one-third of countries allow full same-sex marriage.")
-            if column == "Adoption by same-sex couples":
-                st.write("Indicates whether same-sex couples are legally allowed to adopt children. This includes joint adoption as well as second-parent or stepchild adoption. Legal barriers in many countries still prevent same-sex couples from building families with full parental rights.")
-            if column == "LGBT people allowed to serve openly in military?":
-                st.write("Indicates whether LGBTQ+ individuals are permitted to serve openly in the national armed forces without risk of expulsion, harassment, or forced concealment. In some countries, LGBTQ+ people are barred entirely; in others, they may serve but must hide their identity.")
-            if column == "Anti-discrimination laws concerning sexual orientation":
-                st.write("Indicates whether a country has national laws that protect individuals from discrimination based on sexual orientation in key areas such as employment, housing, education, and access to services. These laws are essential for protecting the dignity and safety of LGBTQ+ people.")
-            if column == "Anti-discrimination laws concerning gender identity":
-                st.write("Indicates whether a country has national laws protecting against discrimination based on gender identity. These laws are crucial for safeguarding the rights of transgender and gender nonconforming individuals in areas such as employment, healthcare, education, and housing.")
-            
-            # Basic statistics and analysis
+
+            # Show description if available
+            if column in column_descriptions:
+                st.write(column_descriptions[column])
+
+            # Value counts and percentage breakdown
             value_counts = df[column].value_counts()
             total = value_counts.sum()
-            
-            # Create a DataFrame to display with percentages
+
             display_df = pd.DataFrame({
                 'Value': value_counts.index,
                 'Count': value_counts.values.astype(str),
-                'Percentage': [f"{(x/total*100):.1f}%" for x in value_counts.values]
+                'Percentage': [f"{(x / total * 100):.1f}%" for x in value_counts.values]
             })
-            display_df['Count'] = display_df['Count'].str.ljust(3)  # Left-justify count values
+            display_df['Count'] = display_df['Count'].str.ljust(3)
             st.table(display_df)
 
-            # Create bar chart
-            fig = px.bar(
+            # Bar chart
+            bar_fig = px.bar(
                 value_counts,
                 title=f'Breakdown of {column}',
                 labels={'index': 'Value', 'value': 'Count'}
             )
-            st.plotly_chart(fig, key=f'bar_chart_{column}')
-            
-            # Create map visualization
-            fig = px.choropleth(
+            st.plotly_chart(bar_fig, key=f'bar_chart_{column}')
+
+            # Choropleth map
+            map_fig = px.choropleth(
                 df,
                 locations="Territory",
                 locationmode="country names",
@@ -178,7 +180,7 @@ with st.expander("LGBTQ+ Rights Exploratory Analysis"):
                 color_continuous_scale="Viridis",
                 hover_data=['Territory', column]
             )
-            st.plotly_chart(fig, key=f'map_{column}')
+            st.plotly_chart(map_fig, key=f'map_{column}')
 
 with st.expander("Same-sex Marriage and Democracy Analysis"):
     st.markdown("""
